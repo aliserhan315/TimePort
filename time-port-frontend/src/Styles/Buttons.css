@@ -1,0 +1,38 @@
+.button {
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.base {
+  background-color: #FF8C5B;
+  color: black;
+  border: 1px solid transparent;
+}
+
+.base:hover {
+  background-color: #e87749;
+}
+.inverted {
+  background-color: transparent;
+  color: #FF8C5B;
+  border: 2px solid #FF8C5B;
+}
+
+.inverted:hover {
+  background-color: #FF8C5B;
+  color: black;
+}
+
+.google-sign-in {
+  background-color: #4285f4;
+  color: white;
+}
+
+.google-sign-in:hover {
+  background-color: #357ae8;
+}
