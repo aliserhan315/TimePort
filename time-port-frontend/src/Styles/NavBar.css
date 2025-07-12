@@ -35,11 +35,18 @@
   display: flex;
   align-items: center;
   gap: 10px;
-}
+  cursor: pointer;
 
+}
+.username {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+  margin-right: 10px;
+}
 .user-avatar {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   object-fit: cover;
 }
