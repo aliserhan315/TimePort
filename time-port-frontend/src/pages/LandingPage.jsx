@@ -1,0 +1,37 @@
+import Footer from '../Components/Footer';
+import HeroSection from '../Components/HeroSection';
+import InfoSection from '../Components/InfoSection';
+import SignUpBar from '../Components/SignUpBar';
+import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const LandingPage = () => {
+   const infoRef = useRef(null);
+
+ const handleScrollToInfo = () => {
+    infoRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+  const nav=useNavigate()
+    const handleSignUpClick = () => {
+    nav('/signup');
+    }
+ 
+  return (
+  
+
+    <div className="App">
+      <HeroSection btnOnClick={handleScrollToInfo}/>
+      <div ref={infoRef} className="info-section-container">
+        
+      <InfoSection />
+      </div>
+       <SignUpBar onClickHandler={handleSignUpClick}/>
+         <Footer />
+
+       </div>
+   
+  )
+}
+
+export default LandingPage
+

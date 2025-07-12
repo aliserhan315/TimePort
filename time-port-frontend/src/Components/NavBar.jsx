@@ -24,9 +24,9 @@ const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
       
 
       {isAuthenticated ? (
-        <div className="user-info">
+        <div className="user-info" onClick={()=>navigate("/UserPage")}>
           <img src={Userprofile||emptyPfp} alt='UserProfile' className="user-avatar" />
-          <span>{Username}</span>
+          <span className='username'>{Username}</span>
         </div>
       ) : (
         <div className="navbar-buttons">

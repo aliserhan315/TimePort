@@ -1,12 +1,13 @@
+
 .Hero-Section {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  gap: 10dvw;
-  padding: 2rem;
-  padding-bottom: 15dvh;
-  max-width: 1200px;
+  gap: 8vw;
+  padding: 4rem 2rem;
+
+  max-width: 1400px;
   margin: auto;
   font-family: 'Arial', sans-serif;
 }
@@ -17,30 +18,25 @@
 }
 
 .Hero-section1 h1 {
-  font-size: 28px;
-  margin-bottom: 0.5rem;
+  font-size: 36px;
+  margin-bottom: 0.8rem;
 }
 
 .Hero-section1 h2 {
-  font-size: 24px;
-  margin-bottom: 1rem;
+  font-size: 28px;
+  margin-bottom: 1.2rem;
 }
 
 .texts p {
-  font-size: 1rem;
+  font-size: 1.125rem;
   color: #333;
-  line-height: 1.5;
-    margin-bottom: 1.5rem;
-}
-
-.highlight {
-  color: #FF8C5B;
-  font-weight: bold;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
 .hero-image {
-  width: 50dvh;
-  height: 50dvh;
+  width: 50vh;
+  height: 50vh;
   max-width: 600px;
   border-radius: 10px;
   margin-top: 20px;
@@ -49,33 +45,34 @@
 }
 
 @media (max-width: 768px) {
+  .Hero-Section {
+    flex-direction: column;
+    height: auto;
+    padding-bottom: 5vh;
+    text-align: center;
+  }
+
   .hero-image {
     display: none;
   }
-
-  .Hero-Section {
-    flex-direction: column;
-    padding-bottom: 5vh;
-  }
 }
+
 
 .hero-btn {
   margin-top: 1.5rem;
-  padding: 0.75rem 2rem;
-  font-size: 1rem;
+  padding: 0.75rem 2.2rem;
+  font-size: 20px;
   width: fit-content;
   max-width: 100%;
   background-color: #FF8C5B;
   color: black;
-  border: 1px solid transparent;
-    font-size: 20px;
-
+  border: none;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
   transition: all 0.3s ease;
-  border: none;
 }
+
 .hero-btn:hover {
   background-color: #e87749;
 }
