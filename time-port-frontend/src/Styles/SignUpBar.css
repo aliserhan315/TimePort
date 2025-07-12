@@ -1,0 +1,55 @@
+.signup-inline {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.signup-inline h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.highlight {
+  color: #f7550f;
+}
+
+.input-group.input-overlap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-group.input-overlap input {
+  padding: 16px 130px 16px 20px;
+  border-radius: 9999px;
+  border: 1px solid #000;
+  background-color: #fff8f6;
+  font-size: 16px;
+  width: 300px;
+  outline: none;
+}
+
+.input-group.input-overlap button {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  bottom: 4px;
+  background-color: #f7550f;
+  color: black;
+  font-weight: bold;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+.input-group.input-overlap button:hover {
+  background-color: #e24900;
+}
+
