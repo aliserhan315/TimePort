@@ -1,21 +1,18 @@
 
 import '../Styles/Footer.css';
-import SignUpBar from './SignUpBar';
+
 import { FiChevronRight } from 'react-icons/fi';
 import { FaTwitter } from 'react-icons/fa';
 import { AiFillYoutube, AiFillInstagram } from 'react-icons/ai';
 import { SiGithub } from "react-icons/si";
 
-const onClickHandler = () => {
- 
-};
 
-const Footer = ({ showSignUp = true }) => {
+const Footer = () => {
   return (
     <footer className="footer">
       <div className="container">
 
-      { showSignUp && <SignUpBar onClickHandler={onClickHandler} />}
+     
 
         <div className="footer-main">
           <div className="footer-about">

@@ -1,9 +1,11 @@
 .signup-inline {
   display: flex;
   align-items: center;
+  justify-content: space-around;
   gap: 40px;
   flex-wrap: wrap;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .signup-inline h2 {
@@ -38,7 +40,7 @@
   top: 4px;
   bottom: 4px;
   background-color: #f7550f;
-  color: black;
+  color: rgb(255, 255, 255);
   font-weight: bold;
   border: none;
   padding: 10px 24px;
