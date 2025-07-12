@@ -1,13 +1,13 @@
 
 import './App.css';
-import Footer from './Components/Footer';
 
-function App() {
+import AppRoutes from './Routes/AppRoutes';
+
+
+const  App=()=> {
   return (
-    <div className="App">
-     <Footer/>
-     
-    </div>
+   <AppRoutes/>
+    
   );
 }
 

@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import Button from './Buttons';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/NavBar.css'; 
+import emptyPfp from '../assets/emptypfp.png'; 
+
 
 const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
   const navigate = useNavigate();
@@ -23,7 +25,7 @@ const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
 
       {isAuthenticated ? (
         <div className="user-info">
-          <img src={Userprofile} alt='../../public/emptypfp.png' className="user-avatar" />
+          <img src={Userprofile||emptyPfp} alt='UserProfile' className="user-avatar" />
           <span>{Username}</span>
         </div>
       ) : (
