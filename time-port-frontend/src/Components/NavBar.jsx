@@ -20,22 +20,37 @@ const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
       <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
         <Link to="/" onClick={closeMenu}>Home</Link>
         <Link to="/capsulewall" onClick={closeMenu}>Capsule Wall</Link>
+         {isAuthenticated ? (  <Link to="/userpage" className='mobile-auth' onClick={closeMenu}>userpage</Link>)
+         :
       
-         <Link to="/login" className='mobile-auth' onClick={closeMenu}>Sign In</Link>
+         ( <div className='mobile-auth-links'>
+          <Link to="/login" className='mobile-auth' onClick={closeMenu}>Sign In</Link>
            <Link to="/signup" className='mobile-auth' onClick={closeMenu}>Sign Up</Link>
+           </div>)}
+
+
+
+      
+        
         
       </div>
 
       {isAuthenticated ? (
+      
+         
         <div className="user-info" onClick={() => navigate("/UserPage")}>
           <img src={Userprofile || emptyPfp} alt="User profile" className="user-avatar" />
+          
           <span className="username">{Username}</span>
-        </div>
+          </div>
+      
       ) : (
+        
         <div className="navbar-buttons">
           <Button onClick={() => navigate('/login')}>Login</Button>
           <Button buttonType="inverted" onClick={() => navigate('/signUp')}>Register</Button>
-        </div>
+          </div>
+     
       )}
 
       <div className={`hamburger ${menuOpen ? 'open' : ''}`} onClick={handleToggle}>

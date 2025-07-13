@@ -4,7 +4,7 @@ import Navbar from '../Components/NavBar';
 const Layout = () => {
   return (
     <>
-      <Navbar  isAuthenticated="true" Username={'ali'}/>
+      <Navbar  />
       <Outlet />
     </>
   );
