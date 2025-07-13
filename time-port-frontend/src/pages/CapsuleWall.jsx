@@ -1,5 +1,5 @@
-import Button from '../Components/Buttons';
-import CardList from '../Components/Card.list';
+import Button from '../Components/Buttons/Buttons';
+import CardList from '../Components/Card.list/Card.list';
 import { useNavigate } from 'react-router-dom';
 
 

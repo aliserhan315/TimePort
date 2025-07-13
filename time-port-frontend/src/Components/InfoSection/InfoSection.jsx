@@ -1,8 +1,8 @@
-import '../Styles/InfoSection.css';
-import pic1 from '../assets/pic1.jpg';
-import pic2 from '../assets/pic2.png';
-import pic3 from '../assets/pic3.png';
-import pic4 from '../assets/pic4.jpg';
+import './InfoSection.css';
+import pic1 from '../../assets/pic1.jpg';
+import pic2 from '../../assets/pic2.png';
+import pic3 from '../../assets/pic3.png';
+import pic4 from '../../assets/pic4.jpg';
 
 const InfoSection = () => {
   return (

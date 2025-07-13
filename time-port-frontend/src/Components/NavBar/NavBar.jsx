@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Button from './Buttons';
-import '../Styles/NavBar.css';
-import emptyPfp from '../assets/emptypfp.png';
+import Button from '../Buttons/Buttons';
+import './NavBar.css';
+import emptyPfp from '../../assets/emptypfp.png';
 
 const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
   const navigate = useNavigate();
@@ -19,8 +19,8 @@ const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
 
       <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
         <Link to="/" onClick={closeMenu}>Home</Link>
-        <Link to="/capsulewall" onClick={closeMenu}>Capsule Wall</Link>
-         {isAuthenticated ? (  <Link to="/userpage" className='mobile-auth' onClick={closeMenu}>userpage</Link>)
+        <Link to="/capsulewall" onClick={closeMenu}>Capsule-Wall</Link>
+         {isAuthenticated ? (  <Link to="/userpage" onClick={closeMenu}>User-Page</Link>)
          :
       
          ( <div className='mobile-auth-links'>

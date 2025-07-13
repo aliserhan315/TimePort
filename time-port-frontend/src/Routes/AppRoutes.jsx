@@ -5,7 +5,7 @@ import CapsuleWall from '../pages/CapsuleWall';
 import LogIn from '../pages/LogIn';
 import SignUp from '../pages/SignUp';
 import Layout from './Layout';
-import UserPage from '../Components/UserPage';
+import UserPage from '../pages/UserPage';
 
 const AppRoutes = () => {
   return (

@@ -1,5 +1,5 @@
-import '../Styles/CardList.css';
-import Card from './Card';
+import './CardList.css';
+import Card from '../Card/Card';
 
 const CardList = ({listcomponent}) => (
     <div className='card-list'>

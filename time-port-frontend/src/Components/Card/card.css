@@ -1,0 +1,86 @@
+.cardcontainer {
+  width: 200px;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border: 1px solid grey;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  padding: 15px;
+  cursor: pointer;
+  transition: transform 0.4s ease-out;
+  color: #333;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.card-head {
+  background-color: #FFEEC5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px;
+  height: 60px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  flex: 1;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+
+}
+
+.card-icon-open {
+  font-size: 18px;
+  color: #268c01;
+}
+.card-icon-close {
+  font-size: 18px;
+  color: #ff6b6b;
+}
+
+.card-body {
+  font-size: 12px;
+  overflow: hidden;
+  flex-grow: 1;
+  padding-top: 8px;
+}
+.card-owner{
+  align-items: center;
+}
+.user-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.username {
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.card-footer {
+  background-color: #f2f2f2;
+  padding: 6px 10px;
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+.card-footer-text {
+  font-size: 11px;
+  font-style: italic;
+  color: #888;
+  margin: 0;
+}
+  .cardcontainer:hover{
+      transform: scale(1.05);
+    }

@@ -1,5 +1,5 @@
 
-import '../Styles/Footer.css';
+import './Footer.css';
 
 import { FiChevronRight } from 'react-icons/fi';
 import { FaTwitter } from 'react-icons/fa';
