@@ -1,0 +1,45 @@
+
+[
+{
+"id": "user1",
+"username": "Ali Serhan",
+"email": "aliserhan315@gmail.com",
+"password": "ali123",
+"pfp": ""
+},
+{
+"id": "user2",
+"username": "Lina Saab",
+"email": "lina.saab@example.com",
+"password": "lina456",
+"pfp": ""
+},
+{
+"id": "user3",
+"username": "Omar Khalil",
+"email": "omar.k@example.com",
+"password": "omar789",
+"pfp": ""
+},
+{
+"id": "user4",
+"username": "Maya Khoury",
+"email": "maya.k@example.com",
+"password": "maya321",
+"pfp": ""
+},
+{
+"id": "user5",
+"username": "Jad Tamer",
+"email": "jad.t@example.com",
+"password": "jad654",
+"pfp": ""
+},
+{
+"id": "aliserhan315",
+"username": "Ali Serhan",
+"email": "aliserhan315@gmail.com",
+"password": "ali123",
+"pfp": ""
+}
+]

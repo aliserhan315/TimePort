@@ -3,8 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '../Buttons/Buttons';
 import './NavBar.css';
 import emptyPfp from '../../assets/emptypfp.png';
+import { useContext } from 'react';
+import { UserContext } from '../../Context/UserContext';
 
 const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
+  const { currentUser,setCurrentUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -20,7 +23,15 @@ const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
       <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
         <Link to="/" onClick={closeMenu}>Home</Link>
         <Link to="/capsulewall" onClick={closeMenu}>Capsule-Wall</Link>
-         {isAuthenticated ? (  <Link to="/userpage" onClick={closeMenu}>User-Page</Link>)
+         {isAuthenticated ? ( 
+           <div className='mobile-auth-links'>
+          <Link to="/userpage" className='mobile-auth' onClick={closeMenu}>User-Page</Link>
+          <Link onClick={() => {
+             setCurrentUser(null);
+         closeMenu();
+           }} className='mobile-auth'>Logout</Link>
+           </div>
+           )
          :
       
          ( <div className='mobile-auth-links'>
@@ -36,12 +47,16 @@ const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
       </div>
 
       {isAuthenticated ? (
+        <div>
       
-         
-        <div className="user-info" onClick={() => navigate("/UserPage")}>
-          <img src={Userprofile || emptyPfp} alt="User profile" className="user-avatar" />
+    
+        <div className="user-info">
+             
+          <img src={Userprofile || emptyPfp} alt="User profile" className="user-avatar"  onClick={() => navigate("/UserPage")} />
           
-          <span className="username">{Username}</span>
+          <span  onClick={() => navigate("/UserPage")} className="username">{Username}</span>
+            <Button className="logout-btn" onClick={() => setCurrentUser(null)}>logOut</Button>
+          </div>
           </div>
       
       ) : (

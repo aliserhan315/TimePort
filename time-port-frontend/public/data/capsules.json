@@ -1,0 +1,57 @@
+
+[
+{
+"name": "First Time Capsule",
+"ownerId": "user1",
+"ownerpfp": "",
+"status": "public",
+"creationdate": "2024-01-15",
+"activationdate": "2024-07-10",
+"mood": "Nostalgic"
+},
+{
+"name": "Birthday Wishes",
+"ownerId": "user2",
+"ownerpfp": "",
+"status": "public",
+"creationdate": "2024-03-20",
+"activationdate": "2024-12-01",
+"mood": "Joyful"
+},
+{
+"name": "Holiday Greetings",
+"ownerId": "user3",
+"ownerpfp": "",
+"status": "public",
+"creationdate": "2024-02-10",
+"activationdate": "2024-11-25",
+"mood": "Festive"
+},
+{
+"name": "Future Note to Self",
+"ownerId": "user4",
+"ownerpfp": "",
+"status": "public",
+"creationdate": "2025-01-05",
+"activationdate": "2025-06-01",
+"mood": "Hopeful"
+},
+{
+"name": "Graduation Memories",
+"ownerId": "user5",
+"ownerpfp": "",
+"status": "private",
+"creationdate": "2025-03-12",
+"activationdate": "2025-09-15",
+"mood": "Excited"
+},
+{
+"name": "Ali's Secret Vault",
+"ownerId": "aliserhan315",
+"ownerpfp": "",
+"status": "private",
+"creationdate": "2025-02-14",
+"activationdate": "2025-12-31",
+"mood": "Reflective"
+}
+]
