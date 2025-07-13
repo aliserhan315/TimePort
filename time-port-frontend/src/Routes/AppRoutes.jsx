@@ -1,18 +1,20 @@
 
 import { Routes, Route } from 'react-router-dom';
-import Home from '../pages/Home';
+import LandingPage from '../pages/LandingPage';
 import CapsuleWall from '../pages/CapsuleWall';
 import LogIn from '../pages/LogIn';
 import SignUp from '../pages/SignUp';
 import Layout from './Layout';
+import UserPage from '../Components/UserPage';
 
 const AppRoutes = () => {
   return (
     <Routes>
 
       <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/capsulewall" element={<CapsuleWall />} />
+        <Route path="/UserPage" element={<UserPage/>} />
       </Route>
 
       <Route path="/login" element={<LogIn />} />

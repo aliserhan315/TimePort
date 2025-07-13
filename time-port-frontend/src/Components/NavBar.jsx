@@ -1,32 +1,35 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from './Buttons';
-import { useNavigate } from 'react-router-dom';
-import '../Styles/NavBar.css'; 
-import emptyPfp from '../assets/emptypfp.png'; 
-
+import '../Styles/NavBar.css';
+import emptyPfp from '../assets/emptypfp.png';
 
 const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleToggle = () => setMenuOpen(!menuOpen);
+  const closeMenu = () => setMenuOpen(false);
 
   return (
-    <div className="navbar">
-      <nav>
-        <div className='nav-logo'>
-        <div className="logo" onClick={() => navigate('/')}>
-          TimePort
-        </div>
-        <div className="nav-links">
-          <Link to="/">Home</Link>
-          <Link to="/capsulewall">Capsule Wall</Link>
-        </div>
-        </div>
-      </nav>
+    <nav className="navbar">
+     
+        <div className="logo" onClick={() => navigate('/')}>TimePort</div>
+     
+
+      <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
+        <Link to="/" onClick={closeMenu}>Home</Link>
+        <Link to="/capsulewall" onClick={closeMenu}>Capsule Wall</Link>
       
+         <Link to="/login" className='mobile-auth' onClick={closeMenu}>Sign In</Link>
+           <Link to="/signup" className='mobile-auth' onClick={closeMenu}>Sign Up</Link>
+        
+      </div>
 
       {isAuthenticated ? (
-        <div className="user-info" onClick={()=>navigate("/UserPage")}>
-          <img src={Userprofile||emptyPfp} alt='UserProfile' className="user-avatar" />
-          <span className='username'>{Username}</span>
+        <div className="user-info" onClick={() => navigate("/UserPage")}>
+          <img src={Userprofile || emptyPfp} alt="User profile" className="user-avatar" />
+          <span className="username">{Username}</span>
         </div>
       ) : (
         <div className="navbar-buttons">
@@ -34,7 +37,13 @@ const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
           <Button buttonType="inverted" onClick={() => navigate('/signUp')}>Register</Button>
         </div>
       )}
-    </div>
+
+      <div className={`hamburger ${menuOpen ? 'open' : ''}`} onClick={handleToggle}>
+        <span />
+        <span />
+        <span />
+      </div>
+    </nav>
   );
 };
 
