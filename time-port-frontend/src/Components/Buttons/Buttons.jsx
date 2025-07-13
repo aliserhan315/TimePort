@@ -1,4 +1,4 @@
-import '../Styles/Buttons.css';
+import './Buttons.css';
 
 export const BUTTON_TYPE_CLASSES = {
   base: 'base',

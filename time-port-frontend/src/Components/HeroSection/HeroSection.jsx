@@ -1,6 +1,6 @@
-import Button from "./Buttons";
-import '../Styles/HeroSection.css';
-import savememories from '../assets/Savememories.jpg';
+import Button from "../Buttons/Buttons";
+import './HeroSection.css';
+import savememories from '../../assets/Savememories.jpg';
 
 const HeroSection = ({btnOnClick}) => {
   return (

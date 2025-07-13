@@ -1,5 +1,5 @@
 
-import '../Styles/SignUpBar.css'
+import './SignUpBar.css'
 import { FiSend } from 'react-icons/fi';
 
 

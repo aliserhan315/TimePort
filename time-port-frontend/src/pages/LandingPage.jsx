@@ -1,7 +1,7 @@
-import Footer from '../Components/Footer';
-import HeroSection from '../Components/HeroSection';
-import InfoSection from '../Components/InfoSection';
-import SignUpBar from '../Components/SignUpBar';
+import Footer from '../Components/Footer/Footer';
+import HeroSection from '../Components/HeroSection/HeroSection';
+import InfoSection from '../Components/InfoSection/InfoSection';
+import SignUpBar from '../Components/SignUpBar/SignUpBar';
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 

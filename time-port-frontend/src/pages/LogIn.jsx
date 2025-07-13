@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../assets/image.png';
-import Button from '../Components/Buttons';
+import Button from '../Components/Buttons/Buttons';
 import { Link } from 'react-router-dom';
 import '../Styles/Auth.css';
 
