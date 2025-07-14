@@ -26,7 +26,7 @@ const LandingPage = () => {
       <InfoSection />
       </div>
        <SignUpBar onClickHandler={handleSignUpClick}/>
-         <Footer />
+         <Footer  showbutton='true'/>
 
        </div>
    

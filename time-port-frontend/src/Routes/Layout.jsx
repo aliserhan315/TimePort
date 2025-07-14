@@ -1,10 +1,18 @@
 import { Outlet } from 'react-router-dom';
 import Navbar from '../Components/NavBar/NavBar';
+import { useContext } from 'react';
+import { UserContext } from '../Context/UserContext';
+
 
 const Layout = () => {
+  const { currentUser } = useContext(UserContext);
+
   return (
     <>
-      <Navbar  isAuthenticated="true" Username={'ali'}/>
+      {currentUser? (<Navbar isAuthenticated={currentUser} Username={currentUser.username} Userprofile={currentUser.pfp}/>):
+      (<Navbar/>)
+      }
+
       <Outlet />
     </>
   );

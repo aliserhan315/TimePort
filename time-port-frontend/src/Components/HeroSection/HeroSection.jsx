@@ -18,7 +18,10 @@ const HeroSection = ({btnOnClick}) => {
         <Button  className="hero-btn" onClick={btnOnClick} >Learn more</Button>   
         
       </div>
+      <div className="Hero-pics">
       <img src={savememories} alt="Save Memories" className="hero-image" />
+       <img src={savememories} alt="Save Memories" className="hero-image1" />
+       </div>
     </section>
   );
 }

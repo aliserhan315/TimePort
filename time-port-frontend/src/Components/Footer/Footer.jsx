@@ -7,7 +7,7 @@ import { AiFillYoutube, AiFillInstagram } from 'react-icons/ai';
 import { SiGithub } from "react-icons/si";
 
 
-const Footer = () => {
+const Footer = ( {showbutton=''}) => {
   return (
     <footer className="footer">
       <div className="container">
@@ -31,7 +31,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="footer-links">
+          {showbutton && (<div className="footer-links">
             <div>
               <h4>Features</h4>
               <ul>
@@ -52,7 +52,7 @@ const Footer = () => {
                 <li><FiChevronRight className="icon" /> Feedback</li>
               </ul>
             </div>
-          </div>
+          </div>)}
         </div>
 
         <div className="footer-bottom">
