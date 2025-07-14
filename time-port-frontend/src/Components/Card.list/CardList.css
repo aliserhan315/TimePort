@@ -1,9 +1,28 @@
-.card-list{
-  width: 80vw;
-  
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-column-gap: 70px;
-  grid-row-gap: 60px;
+.card-list-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 20px 0;
+}
+
+.card-list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  width: max-content;
+  padding-left: 20px;
+  scroll-behavior: smooth;
+}
+
+.card-list-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.card-list-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.card-list-wrapper::-webkit-scrollbar-track {
+  background-color: transparent;
 }

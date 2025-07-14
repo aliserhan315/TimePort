@@ -1,13 +1,23 @@
 import './CardList.css';
 import Card from '../Card/Card';
 
-const CardList = ({listcomponent}) => (
-    <div className='card-list'>
-      {listcomponent.map((Capsule) => {
-        
-        return <Card Capsule={Capsule}/>
-      })}
+import { useRef } from 'react';
+
+const CardList = ({ listcomponent }) => {
+  const containerRef = useRef(null);
+
+ 
+
+  return (
+    <div className='card-list-wrapper'>
+      <div className='card-list' ref={containerRef}>
+        {listcomponent.map((Capsule, idx) => (
+          <Card key={idx} Capsule={Capsule} />
+        ))}
+      </div>
+     
     </div>
   );
+};
 
-  export default CardList
+export default CardList;

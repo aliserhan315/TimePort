@@ -24,8 +24,8 @@ const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
         <Link to="/" onClick={closeMenu}>Home</Link>
         <Link to="/capsulewall" onClick={closeMenu}>Capsule-Wall</Link>
          {isAuthenticated ? ( 
-           <div className='mobile-auth-links'>
-          <Link to="/userpage" className='mobile-auth' onClick={closeMenu}>User-Page</Link>
+           <div className=' mobile-auth-links'>
+          <Link to="/userpage"onClick={closeMenu}>User-Page</Link>
           <Link onClick={() => {
              setCurrentUser(null);
          closeMenu();

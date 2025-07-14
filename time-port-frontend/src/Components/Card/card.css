@@ -7,7 +7,7 @@
   border: 1px solid grey;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
-  padding: 15px;
+  
   cursor: pointer;
   transition: transform 0.4s ease-out;
   color: #333;
@@ -20,7 +20,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 10px;
+
   padding: 10px;
   height: 60px;
   width: 100%;
@@ -37,7 +37,11 @@
   white-space: nowrap;
 
 }
-
+.card-owner {
+  display: flex;
+  align-items: center;
+ justify-content: center;
+}
 .card-icon-open {
   font-size: 18px;
   color: #268c01;
@@ -73,13 +77,19 @@
   padding: 6px 10px;
   border-radius: 10px;
   margin-top: 8px;
+ 
+  align-items: center;
 }
 
 .card-footer-text {
   font-size: 11px;
   font-style: italic;
+  padding: 3px;
+  padding-bottom: 5px;
+  text-align: center;
   color: #888;
   margin: 0;
+
 }
   .cardcontainer:hover{
       transform: scale(1.05);

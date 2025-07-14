@@ -9,7 +9,32 @@ const dummyCapsules = [
     name: "First Time Capsule",
     ownername: "Ali Serhan",
     ownerpfp: "",
-    status: "Locked",
+    status: "public",
+    creationdate: "2025-07-10",
+    activationdate: "2026-07-10",
+    mood: "Nostalgic"
+  },
+    {
+    name: "First Time Capsule",
+    ownername: "Ali Serhan",
+    ownerpfp: "",
+    status: "public",
+    creationdate: "2025-05-10",
+    activationdate: "2025-06-10",
+    mood: "Nostalgic"
+  },  {
+    name: "First Time Capsule",
+    ownername: "Ali Serhan",
+    ownerpfp: "",
+    status: "public",
+    creationdate: "2025-07-10",
+    activationdate: "2026-07-10",
+    mood: "Nostalgic"
+  },  {
+    name: "First Time Capsule",
+    ownername: "Ali Serhan",
+    ownerpfp: "",
+    status: "public",
     creationdate: "2025-07-10",
     activationdate: "2026-07-10",
     mood: "Nostalgic"
@@ -18,7 +43,7 @@ const dummyCapsules = [
     name: "Future Note to Self",
     ownername: "Maya Khoury",
     ownerpfp: "",
-    status: "Pending",
+    status: "public",
     creationdate: "2025-06-01",
     activationdate: "2026-06-01",
     mood: "Hopeful"
@@ -27,7 +52,7 @@ const dummyCapsules = [
     name: "Graduation Memories",
     ownername: "Jad Tamer",
     ownerpfp: "",
-    status: "Opened",
+    status: "private",
     creationdate: "2024-09-15",
     activationdate: "2025-06-15",
     mood: "Excited"
@@ -39,7 +64,7 @@ function CapsuleWall() {
   const navigate = useNavigate();
   return (
     <div className="App">
-         <Button  onClick={() => navigate('/')}>to home page</Button>
+     
    
         <CardList listcomponent={dummyCapsules} />
      
