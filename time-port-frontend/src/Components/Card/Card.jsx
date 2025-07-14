@@ -1,3 +1,4 @@
+
 import "./card.css";
 import { FaLock, FaLockOpen } from "react-icons/fa";
 import emptyPfp from '../../assets/emptypfp.png';
@@ -5,8 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Card = ({ Capsule }) => {
-  const { name, ownerid, status, creationdate, activationdate, mood } = Capsule;
-
+  const { name, ownerId, status, creationdate, activationdate, mood } = Capsule;
   const isActivated = new Date() >= new Date(activationdate);
   const today = new Date();
   const activation = new Date(activationdate);
@@ -18,7 +18,10 @@ const Card = ({ Capsule }) => {
     const fetchOwner = async () => {
       try {
         const res = await axios.get(`/data/users.json`);
-        const foundUser = res.data.find(user => user.id === ownerid || user._id === ownerid);
+   
+        const foundUser = res.data.find(
+          user => user.id === ownerId || user._id === ownerId
+        );
         setOwner(foundUser);
       } catch (err) {
         console.error("Failed to fetch owner:", err);
@@ -26,7 +29,7 @@ const Card = ({ Capsule }) => {
     };
 
     fetchOwner();
-  }, [ownerid]);
+  }, [ownerId]);
 
   const ownername = owner?.username || "Unknown User";
   const ownerpfp = owner?.profilePic || emptyPfp;

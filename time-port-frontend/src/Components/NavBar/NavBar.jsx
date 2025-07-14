@@ -5,8 +5,14 @@ import './NavBar.css';
 import emptyPfp from '../../assets/emptypfp.png';
 import { useContext } from 'react';
 import { UserContext } from '../../Context/UserContext';
+import UserProfilePopup from '../UserPopUp/UserPopUp';
 
 const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
+
+  const [showProfilePopup, setShowProfilePopup] = useState(false);
+  const handleProfileClick = () => {
+    setShowProfilePopup(!showProfilePopup);
+  }
   const { currentUser,setCurrentUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -52,10 +58,17 @@ const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
     
         <div className="user-info">
              
-          <img src={Userprofile || emptyPfp} alt="User profile" className="user-avatar"  onClick={() => navigate("/UserPage")} />
-          
-          <span  onClick={() => navigate("/UserPage")} className="username">{Username}</span>
+          <img
+              src={currentUser?.profilePic || emptyPfp}
+              alt="User profile"
+              className="user-avatar"
+              onClick={handleProfileClick}
+            />
+                      
+          <span  onClick={handleProfileClick} className="username">{Username}</span>
             <Button className="logout-btn" onClick={() => setCurrentUser(null)}>logOut</Button>
+            {showProfilePopup && (
+              <UserProfilePopup onClose={() => setShowProfilePopup(false)} />)}
           </div>
           </div>
       

@@ -6,6 +6,7 @@ import LogIn from '../pages/LogIn';
 import SignUp from '../pages/SignUp';
 import Layout from './Layout';
 import UserPage from '../pages/UserPage';
+import CreateCapsule from '../pages/CreateCapsule'; 
 
 const AppRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
         <Route path="/capsulewall" element={<CapsuleWall />} />
         <Route path="/UserPage" element={<UserPage/>} />
       </Route>
+      <Route path='CreateCapsule' element={< CreateCapsule/>} />
 
       <Route path="/login" element={<LogIn />} />
       <Route path="/signUp" element={<SignUp />} />

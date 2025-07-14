@@ -1,0 +1,80 @@
+
+.profile-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.profile-popup {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profile-preview img.profile-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: auto;
+}
+
+.profile-popup .input-group {
+  position: relative;
+  margin: 20px 0;
+}
+
+.profile-popup .input-group label {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background: white;
+  padding: 0 5px;
+  font-size: 14px;
+  color: #FF8C5B;
+  z-index: 1;
+}
+
+.profile-popup .input-group input[type="text"],
+.profile-popup .input-group input[type="file"] {
+  width: 90%;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #FF8C5B;
+  border-radius: 5px;
+  outline: none;
+  background: #fff;
+}
+
+.profile-popup .input-group input:focus {
+  border-color: #e87749;
+}
+
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-group button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.button-group .cancel-btn {
+  background-color: #ccc;
+}
