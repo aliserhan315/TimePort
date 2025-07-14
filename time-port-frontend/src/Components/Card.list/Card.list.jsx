@@ -12,7 +12,7 @@ const CardList = ({ listcomponent }) => {
     <div className='card-list-wrapper'>
       <div className='card-list' ref={containerRef}>
         {listcomponent.map((Capsule, idx) => (
-          <Card key={idx} Capsule={Capsule} />
+          <Card  Capsule={Capsule} />
         ))}
       </div>
      
