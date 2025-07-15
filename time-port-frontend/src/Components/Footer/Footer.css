@@ -1,7 +1,7 @@
 .footer {
 
   position: relative;
-  padding: 3rem 1rem;
+  padding: 1rem 3rem;
   background-color: #f8f8f8;
   font-family: sans-serif;
   color: #333;
@@ -50,6 +50,7 @@
   gap: 0.8rem;
   font-size: 20px;
   margin-top: 0.5rem;
+  cursor: pointer;
 }
 
 .social-icons .icon:hover {

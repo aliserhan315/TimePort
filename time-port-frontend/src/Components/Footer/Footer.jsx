@@ -55,10 +55,10 @@ const Footer = ( {showbutton=''}) => {
           </div>)}
         </div>
 
-        <div className="footer-bottom">
+        {showbutton &&<div className="footer-bottom">
           <small>TIME CAPSULE PLATFORM</small><br />
           <small>By Ali Serhan</small>
-        </div>
+        </div>}
       </div>
     </footer>
   );

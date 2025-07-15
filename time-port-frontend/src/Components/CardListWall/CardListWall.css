@@ -1,0 +1,34 @@
+.capsule-wall-wraper{
+    box-shadow: 1px 8px 20px rgba(0, 0, 0, 0.988);
+    box-sizing: border-box;
+    background-color: #ffffff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    padding: .2rem;
+
+}
+.card-list-wall {
+  width: 98%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px 30px;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+
+@media (max-width: 768px) { 
+.capsule-wall-wraper {
+margin: 0px;
+padding: 0px;
+margin: 0px;
+
+}
+.card-list-wall{
+      gap: 20px 40px;
+      padding: 5px;
+      padding-right: 5px;
+      margin: 0px;
+}
+    
+}
