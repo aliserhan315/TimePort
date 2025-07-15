@@ -4,13 +4,16 @@ import Button from '../Components/Buttons/Buttons';
 import { Link, useNavigate } from 'react-router-dom';
 import '../Styles/Auth.css';
 import { UserContext } from '../Context/UserContext';
+import { useLocation } from 'react-router-dom';
 
 const SignUp = () => {
+  const location = useLocation();
+  const prefilledEmail = location.state?.prefilledEmail || ''
   const navigate = useNavigate();
   const { users, setUsers, setCurrentUser } = useContext(UserContext);
 
   const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
+ const [email, setEmail] = useState(prefilledEmail);
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 

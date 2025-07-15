@@ -32,10 +32,7 @@ const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
          {isAuthenticated ? ( 
            <div className=' mobile-auth-links'>
           <Link to="/userpage"onClick={closeMenu}>User-Page</Link>
-          <Link onClick={() => {
-             setCurrentUser(null);
-         closeMenu();
-           }} className='mobile-auth'>Logout</Link>
+          <Link onClick={() => { closeMenu() ; navigate('/capsulewall');setCurrentUser(null);}} className='mobile-auth'>Logout</Link>
            </div>
            )
          :
@@ -66,7 +63,7 @@ const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
             />
                       
           <span  onClick={handleProfileClick} className="username">{Username}</span>
-            <Button className="logout-btn" onClick={() => setCurrentUser(null)}>logOut</Button>
+            <Button className="logout-btn" onClick={() => {setCurrentUser(null);    navigate('/capsulewall');}}>logOut</Button>
             {showProfilePopup && (
               <UserProfilePopup onClose={() => setShowProfilePopup(false)} />)}
           </div>

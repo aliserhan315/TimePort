@@ -12,8 +12,8 @@ const LandingPage = () => {
     infoRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
   const nav=useNavigate()
-    const handleSignUpClick = () => {
-    nav('/signup');
+    const handleSignUpClick = (email) => {
+    nav('/signup', { state: { prefilledEmail: email } });
     }
  
   return (

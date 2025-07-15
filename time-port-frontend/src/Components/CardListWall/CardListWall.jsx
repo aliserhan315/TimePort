@@ -12,7 +12,7 @@ const CardListWall = ({ listcomponent }) => {
     <div className='capsule-wall-wraper'>
       <div className='card-list-wall' ref={containerRef}>
           {listcomponent.slice(-50).map((Capsule, idx) => (
-          <Card key={idx} Capsule={Capsule} />
+          <Card key={idx} Capsule={Capsule} className={"cardinwall"} />
         ))}
       </div>
      

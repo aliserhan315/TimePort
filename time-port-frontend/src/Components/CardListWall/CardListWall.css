@@ -6,6 +6,10 @@
     padding: .2rem;
 
 }
+.cardinwall{
+  padding: 0px;
+  padding-right: 3px;
+}
 .card-list-wall {
   width: 98%;
   margin: auto;
