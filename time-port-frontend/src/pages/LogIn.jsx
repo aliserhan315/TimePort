@@ -36,7 +36,7 @@ const LogIn = () => {
           <h1>Log In</h1>
 
           <div className="input-group">
-            <label htmlFor="email">Email</label>
+            <label className='auth-lable' htmlFor="email">Email</label>
             <input
               type="email"
               id="email"
@@ -48,7 +48,7 @@ const LogIn = () => {
           </div>
 
           <div className="input-group">
-            <label htmlFor="password">Password</label>
+            <label className='auth-lable' htmlFor="password">Password</label>
             <input
               type="password"
               id="password"

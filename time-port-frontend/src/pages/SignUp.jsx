@@ -26,7 +26,7 @@ const SignUp = () => {
       return;
     }
 
-    const id = Date.now().toString(); // simple unique id
+    const id = Date.now().toString(); 
     const newUser = { id, username, email, password };
 
     const updatedUsers = { ...users, [id]: newUser };
@@ -43,7 +43,7 @@ const SignUp = () => {
           <h1>Sign Up</h1>
 
           <div className="input-group">
-            <label htmlFor="username">UserName</label>
+            <label  className='auth-lable' htmlFor="username">UserName</label>
             <input
               type="text"
               id="username"
@@ -55,7 +55,7 @@ const SignUp = () => {
           </div>
 
           <div className="input-group">
-            <label htmlFor="email">Email</label>
+            <label className='auth-lable' htmlFor="email">Email</label>
             <input
               type="email"
               id="email"
@@ -67,7 +67,7 @@ const SignUp = () => {
           </div>
 
           <div className="input-group">
-            <label htmlFor="password">Password</label>
+            <label className='auth-lable' htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
