@@ -22,7 +22,7 @@
   border-radius: 12px;
 }
 .add-file-tag{
-  margin-top: 12px;
+  margin-top: 10px;
 }
 .add-file-container:hover{
   background-color: #FF8C5B;
@@ -48,9 +48,7 @@ border: 2px solid #FF8C5B;
  
   outline: none; 
 }
-.reversedlable{
 
-}
 .back-button {
   background-color: transparent;
   border: 2px solid #f94b4b;
@@ -100,6 +98,7 @@ textarea {
   padding: 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
+  min-height: 40px;
 }
 
 textarea {
