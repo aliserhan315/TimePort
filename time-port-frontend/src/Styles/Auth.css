@@ -54,7 +54,7 @@
   margin: 20px 0;
 }
 
-label {
+.auth-lable {
   position: absolute;
   top: -10px;
   left: 10px;

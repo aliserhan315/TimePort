@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Footer from '../Components/Footer/Footer';
-import CardList from '../Components/Card.list/Card.list';
+import CardListWall from '../Components/CardListWall/CardListWall';
 import SearchBox from '../Components/SearchBar/SearchBar';
 import '../Styles/CapsuleWall.css';  
 
@@ -92,7 +92,7 @@ const CapsuleWall = () => {
       />
       </div>
 
-      <CardList listcomponent={filteredCapsules} />
+      <CardListWall listcomponent={filteredCapsules} />
       <div className="footer-placeholder">
       <Footer />
       </div>

@@ -1,0 +1,159 @@
+.capsulecreate-form {
+  width: 80%;
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  height: 60dvh;
+}
+.add-file-container{
+  border: 2px solid #FF8C5B;
+   width: 150px;
+  outline: none;
+  height: 50px;
+  text-align: center;
+  cursor: pointer;
+ 
+ color: #FF8C5B;
+  border-radius: 12px;
+}
+.add-file-tag{
+  margin-top: 10px;
+}
+.add-file-container:hover{
+  background-color: #FF8C5B;
+  color: white;
+
+}
+.Create-form-header h1 {
+   font-size: 24px;
+  font-weight: bold;
+  color: #FF8C5B;
+  cursor: pointer;
+  align-self: center;
+  margin-bottom: 0px;
+  margin-top: 0px;
+
+}
+.create-textarea{
+    border: 2px solid #4b4b4b;
+   
+}
+.create-textarea:focus{
+border: 2px solid #FF8C5B;
+ 
+  outline: none; 
+}
+
+.back-button {
+  background-color: transparent;
+  border: 2px solid #f94b4b;
+  color: #f94b4b;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.back-button:hover {
+  background-color: #ff5b5b;
+  color: white;
+}
+.title-input{
+      border: 2px solid #4b4b4b;
+}
+
+.warning-message{
+  
+  color: rgb(138, 138, 138);
+  padding-top: 0px;
+  margin-top: 0px;
+  padding-left: 20px;
+}
+.Create-form-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 20px;
+  
+
+  border-bottom: 1px solid #000000;
+}
+
+.form-group-row {
+  display: flex;
+  gap: 10px;
+}
+
+input[type="text"],
+input[type="date"],
+textarea {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  min-height: 40px;
+}
+
+textarea {
+  height: 100px;
+  resize: none;
+}
+.create-input{
+  width: 10%;
+}
+
+.Create-form-options {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 14px;
+}
+.form-option{
+  flex-wrap: wrap;
+  
+  display: flex;
+}
+
+.upload-btn {
+ 
+  padding: 10px 20px;
+
+  border-radius: 6px;
+
+}
+
+.file-list {
+  margin-top: 10px;
+}
+
+.file-item {
+  display: flex;
+  justify-content: space-between;
+  background: #f0fff0;
+  margin: 3px 0;
+  padding: 6px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+ @media(max-width: 500px)  {
+  .Create-form-options{
+    flex-direction: column;
+  }
+.capsulecreate-form {
+  align-items: center;
+}
+textarea{
+  width: 90%;
+}
+
+  
+} 
+
+
