@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Capsule;
 
 class CapsuleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    function getAllCapsules(){
+        $capsules = Capsule::all();
+
+        $response = [];
+        $response["status"] = "success";
+        $response["payload"] = $capsules;
+
+        return json_encode($response, 200);
     }
 
     /**
