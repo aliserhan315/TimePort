@@ -10,7 +10,14 @@ class FileController extends Controller
     /**
      * Display a listing of the resource.
      */
-   function getAllFiles(){
+   function getAllFiles($id=null){
+    if($id){
+        $file= File::find($id);
+        $response = [];
+        $response["status"] = "success";
+        $response["payload"] = $file;
+
+        }
         
         $files = File::all();
         $response = [];

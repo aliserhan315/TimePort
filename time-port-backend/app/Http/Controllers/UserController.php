@@ -47,8 +47,15 @@ class UserController extends Controller
     // {
     //     //
     // }
-    function getAllUsers(){
+    function getAllUsers($id=null){
         $users = User::all();
+          if($id){
+        $user= User::find($id);
+        $response = [];
+        $response["status"] = "success";
+        $response["payload"] = $user;
+
+        }
 
         $response = [];
         $response["status"] = "success";

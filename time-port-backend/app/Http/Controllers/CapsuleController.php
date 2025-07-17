@@ -7,9 +7,15 @@ use App\Models\Capsule;
 
 class CapsuleController extends Controller
 {
-    function getAllCapsules(){
-        $capsules = Capsule::all();
+    function getAllCapsules($id = null){
+        if($id){
+        $capsule= Capsule::find($id);
+        $response = [];
+        $response["status"] = "success";
+        $response["payload"] = $capsule;
 
+        }
+        $capsules= Capsule::all();
         $response = [];
         $response["status"] = "success";
         $response["payload"] = $capsules;
@@ -36,16 +42,29 @@ class CapsuleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+     function addOrUpdateCapsule(Request $request, $id = null){
+        if($id){
+            $capsule= Capsule::find($id);
+        }else{
+            $capsule = new Capsule;
+        }
+        
+      
+        $capsule->save();
 
+        $response = [];
+        $response["status"] = "success";
+        $response["payload"] = $capsule;
+
+        return json_encode($response, 200);
+    }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+         
+            $capsule= Capsule::find($id);
+            $capsule->delete();
     }
 }
