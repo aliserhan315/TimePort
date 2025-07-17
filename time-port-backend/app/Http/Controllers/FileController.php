@@ -3,16 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\File;
 
 class FileController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+   function getAllFiles(){
+        
+        $files = File::all();
+        $response = [];
+        $response["status"] = "success";
+        $response["payload"] = $files;
+
+        return json_encode($response, 200);
     }
+
 
     /**
      * Store a newly created resource in storage.

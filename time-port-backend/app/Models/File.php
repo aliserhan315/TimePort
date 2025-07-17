@@ -16,7 +16,7 @@ class File extends Model
         'capsule_id',
         'file_name',
         'file_type',
-        'file_data',
+        'file_path',
     ];
 
     public function capsule()

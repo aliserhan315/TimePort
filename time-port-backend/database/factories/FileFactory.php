@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\File;
 use App\Models\Capsule;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CapsuleFile>
@@ -20,11 +21,13 @@ class FileFactory extends Factory
      */
     public function definition(): array
     {
+        $filename = Str::uuid() . '.txt';
+        $dir = 'capsule_files';
         return [
             'capsule_id' => Capsule::factory(),
             'file_name' => $this->faker->word() . '.txt',
             'file_type' => 'text/plain',
-            'file_data' => $this->faker->paragraphs(3, true),
+            'file_path'  => "{$dir}/{$filename}",
           
         ];
     }
