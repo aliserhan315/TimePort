@@ -32,7 +32,7 @@ const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
          {isAuthenticated ? ( 
            <div className=' mobile-auth-links'>
           <Link to="/userpage"onClick={closeMenu}>User-Page</Link>
-          <Link onClick={() => { closeMenu() ; navigate('/capsulewall');setCurrentUser(null);}} className='mobile-auth'>Logout</Link>
+          <Link onClick={() => {  navigate('/capsulewall');closeMenu() ;setCurrentUser(null);}} className='mobile-auth'>Logout</Link>
            </div>
            )
          :

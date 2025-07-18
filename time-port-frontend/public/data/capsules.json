@@ -22,6 +22,7 @@
 "name": "Holiday Greetings",
 "ownerId": "user3",
 "ownerpfp": "",
+ "country":"France",
 "status": "public",
 "creationdate": "2024-02-10",
 "activationdate": "2024-11-25",
@@ -58,6 +59,7 @@
     "name": "Capsule #1",
     "ownerId": "user2",
     "ownerpfp": "",
+     "country":"France",
     "status": "public",
     "creationdate": "2024-01-15",
     "activationdate": "2024-07-10",
@@ -112,6 +114,7 @@
     "name": "Capsule #7",
     "ownerId": "user3",
     "ownerpfp": "",
+     "country":"France",
     "status": "public",
     "creationdate": "2023-06-18",
     "activationdate": "2024-05-20",
@@ -140,6 +143,7 @@
     "ownerId": "user2",
     "ownerpfp": "",
     "status": "public",
+     "country":"France",
     "creationdate": "2023-12-25",
     "activationdate": "2024-12-25",
     "mood": "Motivated"
@@ -157,6 +161,7 @@
     "name": "Capsule #12",
     "ownerId": "user4",
     "ownerpfp": "",
+     "country":"France",
     "status": "public",
     "creationdate": "2023-08-19",
     "activationdate": "2026-02-01",
@@ -185,6 +190,7 @@
     "ownerId": "user3",
     "ownerpfp": "",
     "status": "public",
+     "country":"France",
     "creationdate": "2024-09-09",
     "activationdate": "2025-09-09",
     "mood": "Excited"
@@ -202,6 +208,7 @@
     "name": "Capsule #17",
     "ownerId": "user1",
     "ownerpfp": "",
+     "country":"France",
     "status": "public",
     "creationdate": "2023-05-21",
     "activationdate": "2024-05-21",
@@ -212,6 +219,7 @@
     "ownerId": "user2",
     "ownerpfp": "",
     "status": "public",
+     "country":"France",
     "creationdate": "2023-10-30",
     "activationdate": "2026-01-01",
     "mood": "Relaxed"
@@ -238,6 +246,7 @@
     "name": "Capsule #21",
     "ownerId": "user1",
     "ownerpfp": "",
+     "country":"Lebanon",
     "status": "public",
     "creationdate": "2024-06-06",
     "activationdate": "2025-06-06",
@@ -275,6 +284,7 @@
     "ownerId": "user1",
     "ownerpfp": "",
     "status": "private",
+     "country":"Lebanon",
     "creationdate": "2024-02-14",
     "activationdate": "2025-02-14",
     "mood": "Festive"
@@ -284,6 +294,7 @@
     "ownerId": "user2",
     "ownerpfp": "",
     "status": "public",
+     "country":"Lebanon",
     "creationdate": "2023-09-09",
     "activationdate": "2024-09-09",
     "mood": "Proud"
@@ -293,6 +304,7 @@
     "ownerId": "user3",
     "ownerpfp": "",
     "status": "private",
+     "country":"Lebanon",
     "creationdate": "2024-12-12",
     "activationdate": "2025-12-12",
     "mood": "Motivated"
@@ -302,6 +314,7 @@
     "ownerId": "user4",
     "ownerpfp": "",
     "status": "public",
+     "country":"Lebanon",
     "creationdate": "2024-10-10",
     "activationdate": "2025-10-10",
     "mood": "Curious"
@@ -311,6 +324,7 @@
     "ownerId": "user1",
     "ownerpfp": "",
     "status": "public",
+     "country":"Lebanon",
     "creationdate": "2023-01-01",
     "activationdate": "2024-01-01",
     "mood": "Relaxed"
@@ -338,6 +352,7 @@
     "ownerId": "user4",
     "ownerpfp": "",
     "status": "public",
+     "country":"Lebanon",
     "creationdate": "2024-05-25",
     "activationdate": "2025-05-25",
     "mood": "Proud"
@@ -374,6 +389,7 @@
     "ownerId": "user4",
     "ownerpfp": "",
     "status": "public",
+     "country":"Lebanon",
     "creationdate": "2024-06-30",
     "activationdate": "2025-06-30",
     "mood": "Nostalgic"
@@ -383,6 +399,7 @@
     "ownerId": "user1",
     "ownerpfp": "",  
     "status": "private",
+    "country":"Lebanon",
     "creationdate": "2023-02-14",
     "activationdate": "2024-02-14",
     "mood": "Festive"
