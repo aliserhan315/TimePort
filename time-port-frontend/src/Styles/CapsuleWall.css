@@ -2,9 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
   margin: 20px;
-  flex-wrap: wrap;
-  gap:  8.5dvw;
+
+  gap: 7dvw;
 }
 
 .header::before {
@@ -16,45 +17,91 @@
   display: flex;
   gap: 20px;
   justify-content: center;
-  flex: 1;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  flex-wrap: wrap;
+}
+
+.year-box {
+  background: linear-gradient(135deg, #FFEEC5, #FFD9EC);
+  color: #9F1776;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+}
+
+.year-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.year-box.active {
+  border: 2px solid #9F1776;
+  background: #FFF2DC;
+  box-shadow: 0 0 10px rgba(159, 23, 118, 0.4);
+}
+
+.country-dropdown {
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 1.5px solid #ccc;
+  background: #fff7ec;
+  color: #9F1776;
+  font-weight: 600;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  max-width: 100%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+.country-dropdown:focus,
+.country-dropdown:hover {
+  border-color: #9F1776;
+  box-shadow: 0 0 8px rgba(159, 23, 118, 0.25);
 }
 
 .search-wrapper {
   position: relative;
   width: 300px;
 }
-
-.year-box {
-  background-color: #FFEEC5;
-  color: #9F1776;
-  padding: 12px 25px;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 1.2rem;
-  cursor: pointer;
-  user-select: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 80px;
-  height: 50px;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.year-box:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-.year-box.active {
-  border: 2px solid #9F1776;
-  box-shadow: 0 0 10px #9F1776;
+@media (max-width: 900px) {
+  .header {
+    gap:3dvw;
+  }
 }
 
 @media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .search-wrapper {
+    width: 100%;
+  }
+
   .year-filters {
-    display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+ .country-dropdown {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }

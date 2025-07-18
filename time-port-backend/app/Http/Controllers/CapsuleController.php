@@ -4,23 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Capsule;
+use App\Services\CapsuleService;
+use App\Http\Controllers\Controller;
+use App\Traits\ResponseTrait;
 
 class CapsuleController extends Controller
 {
-    function getAllCapsules($id = null){
-        if($id){
-        $capsule= Capsule::find($id);
-        $response = [];
-        $response["status"] = "success";
-        $response["payload"] = $capsule;
+      use ResponseTrait;
 
-        }
-        $capsules= Capsule::all();
-        $response = [];
-        $response["status"] = "success";
-        $response["payload"] = $capsules;
-
-        return json_encode($response, 200);
+    public function getAllCapsules()
+    {
+        $capsules = CapsuleService::getAllCapsules();
+        return $this->responseJSON($capsules);
     }
 
     /**
@@ -42,21 +37,16 @@ class CapsuleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-     function addOrUpdateCapsule(Request $request, $id = null){
-        if($id){
-            $capsule= Capsule::find($id);
-        }else{
-            $capsule = new Capsule;
-        }
-        
-      
-        $capsule->save();
+  
 
-        $response = [];
-        $response["status"] = "success";
-        $response["payload"] = $capsule;
+    public function addOrUpdateCapsule(Request $request, $id = null)
+    {
+        $capsule = $id ? CapsuleService::getAllCapsules($id) : new Capsule;
 
-        return json_encode($response, 200);
+        if (!$capsule) return $this->fail("Capsule not found", "fail", 404);
+
+        $capsule = CapsuleService::createOrUpdateCapsule($request->all(), $capsule);
+        return $this->responseJSON($capsule);
     }
     /**
      * Remove the specified resource from storage.

@@ -45,7 +45,7 @@ const SignUp = () => {
           <div className="input-group">
             <label  className='auth-lable' htmlFor="username">UserName</label>
             <input
-              type="text"
+              type="name"
               id="username"
               placeholder="UserName"
               value={username}

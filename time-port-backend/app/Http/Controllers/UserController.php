@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Traits\ResponseTrait;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
@@ -47,44 +49,21 @@ class UserController extends Controller
     // {
     //     //
     // }
-    function getAllUsers($id=null){
-        $users = User::all();
-          if($id){
-        $user= User::find($id);
-        $response = [];
-        $response["status"] = "success";
-        $response["payload"] = $user;
+  use ResponseTrait;
 
-        }
-
-        $response = [];
-        $response["status"] = "success";
-        $response["payload"] = $users;
-
-        return json_encode($response, 200);
+    public function getAllUsers()
+    {
+        $users = UserService::getAllUsers();
+        return $this->responseJSON($users);
     }
 
-    
+    public function addOrUpdateUser(Request $request, $id = null)
+    {
+        $user = $id ? UserService::getAllUsers($id) : new User;
 
+        if (!$user) return $this->fail("User not found", "fail", 404);
 
-    function addOrUpdateUser(Request $request, $id = null){
-        if($id){
-            $User = User::find($id);
-        }else{
-            $User = new User;
-        }
-        
-        $User->category_id = 0;
-        $User->title = $request["title"] || $User->title; 
-        $User->description =  $id && !isset($request["description"]) ?  $User->title : $request["description"];
-        $User->status = 0;
-        $User->color =  $id && !isset($request["color"]) ? $User->title : $request["color"];
-        $User->save();
-
-        $response = [];
-        $response["status"] = "success";
-        $response["payload"] = $User;
-
-        return json_encode($response, 200);
+        $user = UserService::createOrUpdateUser($request->all(), $user);
+        return $this->responseJSON($user);
     }
 }
