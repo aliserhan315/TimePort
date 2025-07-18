@@ -7,63 +7,54 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Traits\ResponseTrait;
 use App\Services\UserService;
+use Exception;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    // public function index()
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Store a newly created resource in storage.
-    //  */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Display the specified resource.
-    //  */
-    // public function show(string $id)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
-    // public function update(Request $request, string $id)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  */
-    // public function destroy(string $id)
-    // {
-    //     //
-    // }
-  use ResponseTrait;
-
-    public function getAllUsers()
+    use ResponseTrait;
+  
+     public function getAllUsers($id=null)
     {
-        $users = UserService::getAllUsers();
-        return $this->responseJSON($users);
+        
+        try{
+            $users=UserService::getAllUsers($id);
+            if ($id && !$users) {
+                return $this->fail("Capsule not found", "fail", 404);
+            }
+             return $this->responseJSON($users);
+            
+
+        }catch(Exception $e){
+            return $this->fail($e->getMessage(), "error", 500);
+        }
     }
 
     public function addOrUpdateUser(Request $request, $id = null)
     {
-        $user = $id ? UserService::getAllUsers($id) : new User;
+     try{
+         $user = $id ? UserService::getAllUsers($id) : new User;
+               if ($id && !$user) {
+                return $this->fail("Capsule not found", "fail", 404);
+            }
+            $user = UserService::createOrUpdateUser($request->all(), $user);
+            return $this->responseJSON($user);
 
-        if (!$user) return $this->fail("User not found", "fail", 404);
+     }catch(Exception $e){
+            return $this->fail($e->getMessage(), "error", 500);
+     }
+    }
 
-        $user = UserService::createOrUpdateUser($request->all(), $user);
-        return $this->responseJSON($user);
+    public function destroy(string $id)
+    {
+         try{
+            $user = User::find($id);
+             if (!$user) {
+                return $this->fail("user not found", "fail", 404);
+            }
+             $user->delete();
+            return $this->responseJSON("user deleted successfully");
+         }catch(Exception $e){
+              return $this->fail($e->getMessage(), "error", 500);
+         }
     }
 }

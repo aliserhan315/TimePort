@@ -2,10 +2,8 @@
 
 namespace App\Traits;
 
-
-
-trait ResponseTrait
-{
+trait ResponseTrait{
+    
      static function responseJSON($payload, $status = "success", $status_code = 200)
      {
         return response()->json([
@@ -21,4 +19,6 @@ trait ResponseTrait
             "payload"  => $errors
         ], $status_code);
     }
+
+
 }

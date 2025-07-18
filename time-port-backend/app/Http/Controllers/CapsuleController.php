@@ -6,55 +6,67 @@ use Illuminate\Http\Request;
 use App\Models\Capsule;
 use App\Services\CapsuleService;
 use App\Http\Controllers\Controller;
-use App\Traits\ResponseTrait;
+use Exception;
 
-class CapsuleController extends Controller
-{
-      use ResponseTrait;
+class CapsuleController extends Controller{
+    
 
-    public function getAllCapsules()
+    public function getAllCapsules($id = null)
     {
-        $capsules = CapsuleService::getAllCapsules();
-        return $this->responseJSON($capsules);
+        try {
+            $capsules = CapsuleService::getAllCapsules($id);
+            if ($id && !$capsules) {
+                return $this->fail("Capsule not found", "fail", 404);
+            }
+            return $this->responseJSON($capsules);
+        } catch (Exception $e) {
+            return $this->fail($e->getMessage(), "error", 500);
+        }
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-  
 
     public function addOrUpdateCapsule(Request $request, $id = null)
     {
-        $capsule = $id ? CapsuleService::getAllCapsules($id) : new Capsule;
+        try {
+            $capsule = $id ? CapsuleService::getAllCapsules($id) : new Capsule;
 
-        if (!$capsule) return $this->fail("Capsule not found", "fail", 404);
+            if ($id && !$capsule) {
+                return $this->fail("Capsule not found", "fail", 404);
+            }
 
-        $capsule = CapsuleService::createOrUpdateCapsule($request->all(), $capsule);
-        return $this->responseJSON($capsule);
+            $capsule = CapsuleService::createOrUpdateCapsule($request->all(), $capsule);
+            return $this->responseJSON($capsule);
+        } catch (Exception $e) {
+            return $this->fail($e->getMessage(), "error", 500);
+        }
     }
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+
+  
+  
+  
+
+    public function destroyCapsules($id)
     {
-         
-            $capsule= Capsule::find($id);
+        try {
+            $capsule = Capsule::find($id);
+
+            if (!$capsule) {
+                return $this->fail("Capsule not found", "fail", 404);
+            }
+
             $capsule->delete();
+            return $this->responseJSON("Capsule deleted successfully");
+        } catch (Exception $e) {
+            return $this->fail($e->getMessage(), "error", 500);
+        }
+    }
+  
+     public function getCapsulesByUserId($user_id)
+     {
+        try {
+            $capsules = CapsuleService::getAllUserCapsules($user_id);
+            return $this->responseJSON($capsules);
+        } catch (Exception $e) {
+            return $this->fail($e->getMessage(), "error", 500);
+        }
     }
 }

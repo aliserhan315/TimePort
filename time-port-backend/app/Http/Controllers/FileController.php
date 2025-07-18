@@ -4,59 +4,44 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\File;
+use App\Services\FileService;
+use App\Traits\ResponseTrait;
 
 class FileController extends Controller
 {
+        use ResponseTrait;
     /**
      * Display a listing of the resource.
      */
-   function getAllFiles($id=null){
-    if($id){
-        $file= File::find($id);
-        $response = [];
-        $response["status"] = "success";
-        $response["payload"] = $file;
-
-        }
-        
-        $files = File::all();
-        $response = [];
-        $response["status"] = "success";
-        $response["payload"] = $files;
-
-        return json_encode($response, 200);
-    }
-
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+ public function getAllFiles()
     {
-        //
+        $files = FileService::getAllFiles();
+        return $this->responseJSON($files);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+
+
+   
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+       public function addOrUpdateCapsule(Request $request, $id = null)
     {
-        //
-    }
+        $file = $id ? FileService::getAllFiles($id) : new File;
 
+        if (!$file) return $this->fail("Capsule not found", "fail", 404);
+
+        $file = FileService::createOrUpdateFile($request->all(), $file);
+        return $this->responseJSON($file);
+    }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+         
+            $capsule= File::find($id);
+            $capsule->delete();
     }
 }

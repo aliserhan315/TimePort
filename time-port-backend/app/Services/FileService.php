@@ -26,5 +26,9 @@ class FileService
         $file->save();
         return $file;
     }
+        public static function getAllCapsuleFiless($capsule_id)
+{
+   return File::where('capsule_id', $capsule_id)->get();
+}
 
 }
