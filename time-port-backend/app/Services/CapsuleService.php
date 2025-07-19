@@ -2,6 +2,7 @@
 
 namespace App\Services;
 use App\Models\Capsule;
+use Stevebauman\Location\Facades\Location;
 
 class CapsuleService
 {
@@ -32,7 +33,12 @@ class CapsuleService
     {
         $capsule->user_id = $data['user_id'] ?? $capsule->user_id;
         $capsule->name = $data['name'] ?? $capsule->name;
-        $capsule->country = $data['country'] ?? geoip(request()->ip())->country ?? $capsule->country;
+     
+        $position = Location::get();
+        if ($position && $position->countryName) {
+            $capsule->country = $position->countryName;
+        }
+    
 
         $capsule->is_activated = $data['is_activated'] ?? $capsule->is_activated;
         $capsule->is_surprise = $data['is_surprise'] ?? $capsule->is_surprise;
