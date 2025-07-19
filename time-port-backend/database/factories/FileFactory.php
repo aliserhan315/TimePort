@@ -24,7 +24,7 @@ class FileFactory extends Factory
         $filename = Str::uuid() . '.txt';
         $dir = 'capsule_files';
         return [
-            'capsule_id' => Capsule::factory(),
+            'capsule_id' => $this->faker->numberBetween(1, 30),
             'file_name' => $this->faker->word() . '.txt',
             'file_type' => 'text/plain',
             'file_path'  => "{$dir}/{$filename}",

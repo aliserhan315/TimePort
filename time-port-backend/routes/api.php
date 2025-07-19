@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CapsuleController;
-use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\AuthController;
 
 
 
@@ -38,9 +38,10 @@ Route::prefix('file')->group(function () {
     Route::put('{id}', [FileController::class, 'addOrUpdateFile']);
     Route::delete('{id}', [FileController::class, 'destroy']);
 });
-Route::controller(AuthController::class)->group(function () {
-    Route::post('login', 'login');
-    Route::post('register', 'register');
-    Route::post('logout', 'logout');
-    Route::post('refresh', 'refresh');
-});
+ 
+Route::post("/login", [AuthController::class, "login"]);
+Route::post("/register", [AuthController::class, "register"]);
+    
+
+
+

@@ -6,13 +6,14 @@ use App\Models\Capsule;
 class CapsuleService
 {
     
-    public static function getAllCapsules($id = null)
-    {
-        if (!$id) {
-           Capsule::where('is_activated', true)->where('is_public', true)->get();
-        }
-         return Capsule::find($id);
+   public static function getAllCapsules($id = null)
+{
+    if (!$id) {
+       return Capsule::where('is_activated', true)->where('is_public', true)->get();
     }
+    return Capsule::find($id);
+}
+
     
 
     public static function getAllUserCapsules($user_id)
