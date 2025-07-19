@@ -5,35 +5,62 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../Styles/Auth.css';
 import { UserContext } from '../Context/UserContext';
 import { useLocation } from 'react-router-dom';
+import { registerUser } from '../api';
 
 const SignUp = () => {
   const location = useLocation();
   const prefilledEmail = location.state?.prefilledEmail || ''
   const navigate = useNavigate();
-  const { users, setUsers, setCurrentUser } = useContext(UserContext);
+
+  const { setCurrentUser, setAuthToken } = useContext(UserContext);
 
   const [username, setUsername] = useState('');
  const [email, setEmail] = useState(prefilledEmail);
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
-  const signupHandler = (e) => {
-    e.preventDefault();
+ const signupHandler = async (e) => {
+        e.preventDefault();
+        setErrorMsg('');
 
-    const emailExists = Object.values(users).some(user => user.email === email);
-    if (emailExists) {
-      setErrorMsg('Email already registered');
-      return;
-    }
+        try {
+            const response = await registerUser({ username, email, password });
 
-    const id = Date.now().toString(); 
-    const newUser = { id, username, email, password };
+            if (!response || !response.data) {
+                console.error('Registration error: Received an invalid or empty response.', response);
+                setErrorMsg('Registration failed: Received an invalid response from the server.');
+                return;
+            }
 
-    const updatedUsers = { ...users, [id]: newUser };
-    setUsers(updatedUsers);
-    setCurrentUser(newUser);
-    navigate('/userpage');
-  };
+            const { payload: user } = response.data;
+
+            if (!user || !user.token) {
+                console.error('Registration error: User data or token missing in server response payload.', response.data);
+                setErrorMsg('Registration failed: User data or token missing in server response.');
+                return;
+            }
+
+            setAuthToken(user.token);
+            setCurrentUser(user);
+            navigate('/userpage');
+
+        } catch (error) {
+            console.error('Registration error:', error);
+            let message = 'An unexpected error occurred during registration. Please try again.';
+
+            if (error.response && error.response.data) {
+                if (error.response.data.payload) {
+                    message = error.response.data.payload;
+                } else if (error.response.data.message) {
+                    message = error.response.data.message;
+                }
+            } else if (error.request) {
+                message = 'Network error. Please check your connection or API URL.';
+            }
+
+            setErrorMsg(message);
+        }
+    };
 
   return (
     <div className='auth-container'>

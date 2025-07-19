@@ -8,9 +8,13 @@ use App\Models\File;
 use App\Services\FileService;
 use App\Traits\ResponseTrait;
 use Exception;
+use Illuminate\Support\Facades\Storage;
+use \Symfony\Component\HttpFoundation\StreamedResponse;
+
 
 class FileController extends Controller
 {
+    
 
  public function getAllFiles($id = null)
     {
@@ -21,6 +25,7 @@ class FileController extends Controller
             }
                 return $this->responseJSON($files);
     }catch(Exception $e){ 
+        
              return $this->fail($e->getMessage(), "error", 500);
         }
     }
@@ -64,4 +69,18 @@ class FileController extends Controller
             return $this->fail($e->getMessage(), "error", 500);
         }
     }
+    // public function downloadFile(string $id)
+    //     {
+    //         try {
+    //             $fileData = FileService::getDownloadableFile($id);
+
+    //             if (!$fileData) {
+    //                 return $this->fail("File not found", "fail", 404);
+    //             }
+    //             return Storage::download($fileData['path'], $fileData['name']);
+
+    //         } catch (Exception $e) {
+    //             return $this->fail($e->getMessage(), "error", 500);
+    //         }
+    // }
 }

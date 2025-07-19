@@ -2,6 +2,7 @@
 
 namespace App\Services;
 use App\Models\File;
+use Illuminate\Support\Facades\Storage;
 
 class FileService
 {
@@ -21,7 +22,10 @@ class FileService
         $file->capsule_id = $data['capsule_id'] ?? $file->capsule_id;
         $file->file_name = $data['file_name'] ?? $file->file_name;
         $file->file_type = $data['file_type'] ?? $file->file_type;
-        $file->file_data = $data['file_data'] ?? $file->file_data;
+        if (isset($data['file'])) {
+        $path = $data['file']->store('capsule_files', 'private');
+        $file->file_path = $path;
+        }
 
         $file->save();
         return $file;
@@ -30,5 +34,22 @@ class FileService
 {
    return File::where('capsule_id', $capsule_id)->get();
 }
+   public static function getDownloadableFile(string $id)
+    {
+        $file = File::find($id);
+
+        if (!$file) {
+            return null;
+        }
+
+        if ($file->file_path && Storage::disk('private')->exists($file->file_path)) {
+            return [
+                'path' => $file->file_path,
+                'name' => $file->file_name ?? basename($file->file_path)
+            ];
+        }
+
+        return null; 
+    }
 
 }
