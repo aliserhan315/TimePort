@@ -9,7 +9,7 @@ const Layout = () => {
 
   return (
     <>
-      {currentUser? (<Navbar isAuthenticated={currentUser} Username={currentUser.username} Userprofile={currentUser.pfp}/>):
+      {currentUser? (<Navbar isAuthenticated={currentUser} Username={currentUser.name} Userprofile={currentUser.profile_photo}/>):
       (<Navbar/>)
       }
 

@@ -14,33 +14,29 @@ const LogIn = () => {
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
+const loginHandler = async (e) => {
+    e.preventDefault();
+    setErrorMsg('');
 
-  const loginHandler = async (e) => {
-        e.preventDefault();
-        setErrorMsg('');
+    try {
+        const { data } = await loginUser({ email, password });
+        const { payload: user } = data;
+        
+        setAuthToken(user.token);
+        setCurrentUser(user);
+        navigate('/userpage');
+    } catch (error) {
+        console.error('Login error:', error);
 
-        try {
-            const response = await loginUser({ email, password });
-            const { payload: user } = response.data; 
-            const token = user.token; 
+        const message =
+            error?.response?.data?.payload ||
+            error?.response?.data?.message ||
+            'An unexpected error occurred. Please try again.';
 
-            setAuthToken(token);
-            setCurrentUser(user);
-            navigate('/userpage');
-        } catch (error) {
-            console.error('Login error:', error);
-            let message = 'An unexpected error occurred. Please try again.';
-              
-                if ( error.response.data.payload) {
-                    message = error.response.data.payload;
-                } else if ( error.response.data.message) {
-                 
-                    message = error.response.data.message;
-                }
-            
-            setErrorMsg(message);
-        }
-    };
+        setErrorMsg(message);
+    }
+};
+
 
   return (
     <div className='auth-container'>

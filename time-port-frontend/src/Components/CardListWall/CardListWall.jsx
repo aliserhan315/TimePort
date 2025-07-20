@@ -3,7 +3,7 @@ import Card from '../Card/Card';
 
 import { useRef } from 'react';
 
-const CardListWall = ({ listcomponent }) => {
+const CardListWall = ({ listcomponent, usersMap}) => {
   const containerRef = useRef(null);
 
  
@@ -12,7 +12,7 @@ const CardListWall = ({ listcomponent }) => {
     <div className='capsule-wall-wraper'>
       <div className='card-list-wall' ref={containerRef}>
           {listcomponent.slice(-50).map((Capsule, idx) => (
-          <Card key={idx} Capsule={Capsule} className={"cardinwall"} />
+          <Card key={idx} capsule={Capsule}      owner={usersMap[Capsule.user_id]} className={"cardinwall"} />
         ))}
       </div>
      

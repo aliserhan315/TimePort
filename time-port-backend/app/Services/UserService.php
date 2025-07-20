@@ -12,9 +12,9 @@ class UserService
       public static function getAllUsers($id = null)
     {
         if (!$id) {
-            return User::all();
+        return User::select('id', 'name', 'profile_photo')->get();
         }
-        return User::find($id);
+        return User::select('id', 'name', 'profile_photo')->find($id);
     }
 
     public static function createOrUpdateUser($data, $user)

@@ -1,9 +1,10 @@
+
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import Footer from '../Components/Footer/Footer';
 import CardListWall from '../Components/CardListWall/CardListWall';
 import SearchBox from '../Components/SearchBar/SearchBar';
 import '../Styles/CapsuleWall.css';
+import { getAllCapsules, getAllUsers } from '../api';
 
 const CapsuleWall = () => {
   const [capsules, setCapsules] = useState([]);
@@ -11,61 +12,83 @@ const CapsuleWall = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState('');
+  const [usersMap, setUsersMap] = useState({});
 
   const currentYear = new Date().getFullYear();
   const lastYear = currentYear - 1;
 
   useEffect(() => {
-    const fetchCapsules = async () => {
+    const fetchInitialData = async () => {
       try {
-        const res = await axios.get('/data/capsules.json');
+
+        const usersRes = await getAllUsers();
+        const usersData = usersRes.data.payload;
+        const map = {};
+        if (Array.isArray(usersData)) {
+          usersData.forEach(user => {
+          map[user.id] = { name: user.name, profile_photo: user.profile_photo };
+          });
+        }
+        setUsersMap(map);
+
+
+        const capsulesRes = await getAllCapsules();
+        const allCapsulesData = capsulesRes.data.payload;
         const now = new Date();
-        const filtered = res.data.filter(capsule =>
-          capsule.status === 'public' &&
-          new Date(capsule.activationdate) <= now
+
+
+        const visibleCapsules = allCapsulesData.filter(capsule =>
+          capsule.is_public === 1 &&
+          capsule.activation_date &&
+          new Date(capsule.activation_date) <= now
         );
-        setCapsules(filtered);
-        setFilteredCapsules(filtered);
+
+        setCapsules(visibleCapsules);
+        setFilteredCapsules(visibleCapsules);
       } catch (err) {
         console.error('Failed to fetch capsules:', err);
       }
     };
-    fetchCapsules();
+
+    fetchInitialData();
   }, []);
 
   const filterCapsules = (search = searchTerm, year = selectedYear, country = selectedCountry) => {
     const now = new Date();
 
     const filtered = capsules.filter(capsule => {
-      const nameMatch = capsule.name.toLowerCase().includes(search.toLowerCase());
-      const moodMatch = capsule.mood.toLowerCase().includes(search.toLowerCase());
-      const yearMatch = year ? new Date(capsule.activationdate).getFullYear() === year : true;
-      const countryMatch = country ? capsule.country?.toLowerCase() === country.toLowerCase() : true;
+      if (capsule.is_public !== 1 || !capsule.activation_date) return false;
+      if (new Date(capsule.activation_date) > now) return false;
 
-      return (
-        capsule.status === 'public' &&
-        new Date(capsule.activationdate) <= now &&
-        (nameMatch || moodMatch) &&
-        yearMatch &&
-        countryMatch
-      );
+      const term = search.toLowerCase();
+      const nameMatch = capsule.name.toLowerCase().includes(term);
+      const moodMatch = capsule.mood.toLowerCase().includes(term);
+
+      const activationYear = new Date(capsule.activation_date).getFullYear();
+      const yearMatch = year ? activationYear === year : true;
+
+      const countryMatch = country
+        ? capsule.country.toLowerCase() === country.toLowerCase()
+        : true;
+
+      return (nameMatch || moodMatch) && yearMatch && countryMatch;
     });
 
     setFilteredCapsules(filtered);
   };
 
-  const handleSearch = (e) => {
+  const handleSearch = e => {
     const value = e.target.value;
     setSearchTerm(value);
     filterCapsules(value, selectedYear, selectedCountry);
   };
 
-  const filterByYear = (year) => {
+  const filterByYear = year => {
     setSelectedYear(year);
     filterCapsules(searchTerm, year, selectedCountry);
   };
 
-  const handleCountryChange = (e) => {
+  const handleCountryChange = e => {
     const value = e.target.value;
     setSelectedCountry(value);
     filterCapsules(searchTerm, selectedYear, value);
@@ -74,7 +97,11 @@ const CapsuleWall = () => {
   return (
     <div className="App">
       <div className="header">
-        <select className="country-dropdown" onChange={handleCountryChange} value={selectedCountry}>
+        <select
+          className="country-dropdown"
+          onChange={handleCountryChange}
+          value={selectedCountry}
+        >
           <option value="">All Countries</option>
           <option value="lebanon">Lebanon</option>
           <option value="usa">USA</option>
@@ -108,7 +135,10 @@ const CapsuleWall = () => {
         />
       </div>
 
-      <CardListWall listcomponent={filteredCapsules} />
+      <CardListWall
+        listcomponent={filteredCapsules}
+        usersMap={usersMap}
+      />
 
       <div className="footer-placeholder">
         <Footer />

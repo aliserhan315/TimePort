@@ -23,44 +23,26 @@ const SignUp = () => {
         e.preventDefault();
         setErrorMsg('');
 
+       
         try {
-            const response = await registerUser({ username, email, password });
+          const { data } = await registerUser({ username, email, password });
+          const { payload: user } = data;
 
-            if (!response || !response.data) {
-                console.error('Registration error: Received an invalid or empty response.', response);
-                setErrorMsg('Registration failed: Received an invalid response from the server.');
-                return;
-            }
+          setAuthToken(user.token);
+          setCurrentUser(user);
+          navigate('/userpage');
+        }catch (error) {
+          console.error('Signup error:', error);
 
-            const { payload: user } = response.data;
+          const message =
+            error?.response?.data?.payload ||
+            error?.response?.data?.message ||
+            'An unexpected error occurred. Please try again.';
 
-            if (!user || !user.token) {
-                console.error('Registration error: User data or token missing in server response payload.', response.data);
-                setErrorMsg('Registration failed: User data or token missing in server response.');
-                return;
-            }
-
-            setAuthToken(user.token);
-            setCurrentUser(user);
-            navigate('/userpage');
-
-        } catch (error) {
-            console.error('Registration error:', error);
-            let message = 'An unexpected error occurred during registration. Please try again.';
-
-            if (error.response && error.response.data) {
-                if (error.response.data.payload) {
-                    message = error.response.data.payload;
-                } else if (error.response.data.message) {
-                    message = error.response.data.message;
-                }
-            } else if (error.request) {
-                message = 'Network error. Please check your connection or API URL.';
-            }
-
-            setErrorMsg(message);
+          setErrorMsg(message);
         }
-    };
+      };
+
 
   return (
     <div className='auth-container'>
