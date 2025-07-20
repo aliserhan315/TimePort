@@ -3,6 +3,7 @@
 namespace App\Services;
 use App\Models\Capsule;
 use Stevebauman\Location\Facades\Location;
+use Carbon\Carbon;
 
 class CapsuleService
 {
@@ -39,13 +40,12 @@ class CapsuleService
             $capsule->country = $position->countryName;
         }
     
-
-        $capsule->is_activated = $data['is_activated'] ?? $capsule->is_activated;
+        $capsule->is_activated = Carbon::now()->greaterThanOrEqualTo(Carbon::parse($capsule->activation_date));
         $capsule->is_surprise = $data['is_surprise'] ?? $capsule->is_surprise;
         $capsule->is_public = $data['is_public'] ?? $capsule->is_public;
         $capsule->mood = $data['mood'] ?? $capsule->mood;
         $capsule->message = $data['message'] ?? $capsule->message;
-        $capsule->activation_date = $data['activation_date'] ?? $capsule->activation_date;
+        $capsule->activation_date = $data['release_date'] ?? $capsule->activation_date;
 
         $capsule->save();
         return $capsule;

@@ -1,0 +1,83 @@
+.view-capsule-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f9f9f9;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.view-capsule-header {
+  margin-bottom: 30px;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 20px;
+}
+
+.view-capsule-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.view-capsule-header p {
+  font-size: 1.1rem;
+  margin: 5px 0;
+  color: #666;
+}
+
+.file-upload-section {
+  margin-top: 20px;
+  padding: 15px;
+  background: #fff;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+}
+
+.file-upload-section label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.file-upload-section input[type="file"] {
+  display: block;
+  margin-top: 5px;
+}
+
+.uploaded-files {
+  margin-top: 30px;
+}
+
+.uploaded-files h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.file-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.file-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.file-item img {
+  width: 100%;
+  height: auto;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.file-item audio {
+  width: 100%;
+  margin-top: 10px;
+}

@@ -29,20 +29,27 @@ class UserController extends Controller
         }
     }
 
-    public function addOrUpdateUser(Request $request, $id = null)
-    {
-     try{
-         $user = $id ? UserService::getAllUsers($id) : new User;
-               if ($id && !$user) {
-                return $this->fail("Capsule not found", "fail", 404);
-            }
-            $user = UserService::createOrUpdateUser($request->all(), $user);
-            return $this->responseJSON($user);
+  public function addOrUpdateUser(Request $request, $id = null)
+{
+    try {
+        if (!$id) {
+            return $this->fail("User ID is required for update operation.", "fail", 400);
+        }
 
-     }catch(Exception $e){
-            return $this->fail($e->getMessage(), "error", 500);
-     }
+        $user = UserService::getAllUsers($id);
+
+        if (!$user) {
+            return $this->fail("User not found", "fail", 404);
+        }
+
+        $updatedUser = UserService::createOrUpdateUser($request, $user);
+
+        return $this->responseJSON($updatedUser);
+
+    } catch (Exception $e) {
+        return $this->fail($e->getMessage(), "error", 500);
     }
+}
 
     public function destroy(string $id)
     {

@@ -7,6 +7,7 @@ import SignUp from '../pages/SignUp';
 import Layout from './Layout';
 import UserPage from '../pages/UserPage';
 import CreateCapsule from '../pages/CreateCapsule'; 
+import VeiwCapsule from '../pages/VeiwCapsule';
 
 const AppRoutes = () => {
   return (
@@ -18,6 +19,8 @@ const AppRoutes = () => {
         <Route path="/UserPage" element={<UserPage/>} />
       </Route>
       <Route path='CreateCapsule' element={< CreateCapsule/>} />
+      <Route path="/capsule/:id" element={<VeiwCapsule />} />
+
 
       <Route path="/login" element={<LogIn />} />
       <Route path="/signUp" element={<SignUp />} />

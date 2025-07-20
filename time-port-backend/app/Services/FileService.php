@@ -23,11 +23,12 @@ class FileService
         $file->file_name = $data['file_name'] ?? $file->file_name;
         $file->file_type = $data['file_type'] ?? $file->file_type;
         if (isset($data['file'])) {
-        $path = $data['file']->store('capsule_files', 'private');
+        $path = $data['file']->store('capsule_files', 'public');
         $file->file_path = $path;
         }
 
         $file->save();
+        $file->url = asset('storage/' . $file->file_path);
         return $file;
     }
     public static function getAllCapsuleFiles($capsule_id)
