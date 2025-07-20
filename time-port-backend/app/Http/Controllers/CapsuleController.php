@@ -27,7 +27,7 @@ class CapsuleController extends Controller{
     public function addOrUpdateCapsule(Request $request, $id = null)
     {
         try {
-            $capsule = $id ? CapsuleService::getAllCapsules($id) : new Capsule;
+            $capsule = $id ? Capsule::find($id) : new Capsule;
 
             if ($id && !$capsule) {
                 return $this->fail("Capsule not found", "fail", 404);

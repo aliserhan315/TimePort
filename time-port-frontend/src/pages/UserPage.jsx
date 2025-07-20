@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+
 import Footer from '../Components/Footer/Footer';
 import CardList from '../Components/Card.list/Card.list';
 import SearchBox from '../Components/SearchBar/SearchBar';
@@ -7,6 +7,7 @@ import { UserContext } from '../Context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Components/Buttons/Buttons';
 import '../Styles/UserPage.css';
+import {getCapsulesByUser} from "../api"
 
 function UserPage() {
   const navigate = useNavigate();
@@ -16,13 +17,10 @@ function UserPage() {
 
   useEffect(() => {
     const fetchCapsules = async () => {
-      if (!currentUser || !currentUser.id) return;
-
       try {
-        const res = await axios.get('/data/capsules.json');
-        const userCapsules = res.data.filter(
-          capsule => capsule.ownerId === currentUser.id
-        );
+        const res = await getCapsulesByUser(currentUser.id)
+          const userCapsules = res.data.payload 
+          console.log(userCapsules)
 
         setCapsules(userCapsules);
         setFilteredCapsules(userCapsules);

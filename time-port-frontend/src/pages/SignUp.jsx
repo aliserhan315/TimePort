@@ -5,35 +5,44 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../Styles/Auth.css';
 import { UserContext } from '../Context/UserContext';
 import { useLocation } from 'react-router-dom';
+import { registerUser } from '../api';
 
 const SignUp = () => {
   const location = useLocation();
   const prefilledEmail = location.state?.prefilledEmail || ''
   const navigate = useNavigate();
-  const { users, setUsers, setCurrentUser } = useContext(UserContext);
+
+  const { setCurrentUser, setAuthToken } = useContext(UserContext);
 
   const [username, setUsername] = useState('');
  const [email, setEmail] = useState(prefilledEmail);
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
-  const signupHandler = (e) => {
-    e.preventDefault();
+ const signupHandler = async (e) => {
+        e.preventDefault();
+        setErrorMsg('');
 
-    const emailExists = Object.values(users).some(user => user.email === email);
-    if (emailExists) {
-      setErrorMsg('Email already registered');
-      return;
-    }
+       
+        try {
+          const { data } = await registerUser({ username, email, password });
+          const { payload: user } = data;
 
-    const id = Date.now().toString(); 
-    const newUser = { id, username, email, password };
+          setAuthToken(user.token);
+          setCurrentUser(user);
+          navigate('/userpage');
+        }catch (error) {
+          console.error('Signup error:', error);
 
-    const updatedUsers = { ...users, [id]: newUser };
-    setUsers(updatedUsers);
-    setCurrentUser(newUser);
-    navigate('/userpage');
-  };
+          const message =
+            error?.response?.data?.payload ||
+            error?.response?.data?.message ||
+            'An unexpected error occurred. Please try again.';
+
+          setErrorMsg(message);
+        }
+      };
+
 
   return (
     <div className='auth-container'>

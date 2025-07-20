@@ -1,16 +1,19 @@
 import { createContext,useState,useEffect } from "react";
-import axios from "axios";
+
 
 export const UserContext = createContext();
 
 
 export const UserProvider = ({ children }) => {
-    const [users, setUsers] = useState([]);
     const [currentUser, setCurrentUser] = useState(()=>
     {const storedUser = localStorage.getItem("currentUser");
   return storedUser ? JSON.parse(storedUser) :
    null;
 });
+  const [authToken, setAuthToken] = useState(() => {
+        return localStorage.getItem("jwt_token");
+    });
+
    useEffect(() => {
   if (currentUser) {
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
@@ -20,20 +23,18 @@ export const UserProvider = ({ children }) => {
 }, [currentUser]);
 
     useEffect(() => {
-        axios.get('/data/users.json').then((res)=>{
-             const userMap = {};
-        res.data.forEach(user => {
-          userMap[user.id] = user;
-        });
-         setUsers(userMap);
-      
-         })
-    }, []);
+        if (authToken) {
+            localStorage.setItem("jwt_token", authToken);
+        } else {
+            localStorage.removeItem("jwt_token");
+        }
+    }, [authToken]);
+   
     const value = {
-    users,
-    setUsers,
-    currentUser,
-    setCurrentUser
+      currentUser,
+      setCurrentUser,
+      authToken,
+      setAuthToken
   };
 
      return (

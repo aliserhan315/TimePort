@@ -1,9 +1,11 @@
 import './CardList.css';
 import Card from '../Card/Card';
 
-import { useRef } from 'react';
+import { useRef ,useContext} from 'react';
+import { UserContext } from '../../Context/UserContext';
 
 const CardList = ({ listcomponent }) => {
+  const { currentUser } = useContext(UserContext);
   const containerRef = useRef(null);
 
  
@@ -12,7 +14,7 @@ const CardList = ({ listcomponent }) => {
     <div className='card-list-wrapper'>
       <div className='card-list' ref={containerRef}>
         {listcomponent.map((Capsule, idx) => (
-          <Card  Capsule={Capsule} />
+          <Card  capsule={Capsule} owner={currentUser} />
         ))}
       </div>
      

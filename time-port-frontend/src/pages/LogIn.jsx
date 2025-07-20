@@ -4,29 +4,39 @@ import Button from '../Components/Buttons/Buttons';
 import { Link, useNavigate } from 'react-router-dom';
 import '../Styles/Auth.css';
 import { UserContext } from '../Context/UserContext';
+import { loginUser } from '../api';
 
 const LogIn = () => {
   const navigate = useNavigate();
-  const { users, setCurrentUser } = useContext(UserContext);
+  const { setAuthToken, setCurrentUser } = useContext(UserContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
-  const loginHandler = (e) => {
+const loginHandler = async (e) => {
     e.preventDefault();
+    setErrorMsg('');
 
-    const foundUser = Object.values(users).find(
-      (user) => user.email === email && user.password === password
-    );
+    try {
+        const { data } = await loginUser({ email, password });
+        const { payload: user } = data;
+        
+        setAuthToken(user.token);
+        setCurrentUser(user);
+        navigate('/userpage');
+    } catch (error) {
+        console.error('Login error:', error);
 
-    if (foundUser) {
-      setCurrentUser(foundUser);
-      navigate('/userpage');
-    } else {
-      setErrorMsg('Invalid email or password');
+        const message =
+            error?.response?.data?.payload ||
+            error?.response?.data?.message ||
+            'An unexpected error occurred. Please try again.';
+
+        setErrorMsg(message);
     }
-  };
+};
+
 
   return (
     <div className='auth-container'>

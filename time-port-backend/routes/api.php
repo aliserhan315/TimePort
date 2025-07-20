@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CapsuleController;
+use App\Http\Controllers\AuthController;
 
 
 
@@ -30,9 +31,14 @@ Route::prefix('capsule')->group(function () {
     Route::delete('{id}', [CapsuleController::class, 'destroyCapsules']);
 });
 Route::prefix('file')->group(function () {
-    Route::get('/', [FileController::class, 'getAllFiless']);
-     Route::put('/', [FileController::class, 'addOrUpdateUser']);
+    Route::get('/', [FileController::class, 'getAllFiles']);
+    Route::put('/', [FileController::class, 'addOrUpdateFile']);
+    Route::get('capsule/{capsule_id}', [FileController::class, 'getCapsuleFile']);
     Route::get('{id}', [FileController::class, 'getAllFiles']);
-    Route::put('{id}', [FileController::class, 'addOrUpdateUser']);
-    Route::delete('{id}', [FileController::class, 'destroyFile']);
+    Route::put('{id}', [FileController::class, 'addOrUpdateFile']);
+    Route::delete('{id}', [FileController::class, 'destroy']);
 });
+ 
+Route::post("/login", [AuthController::class, "login"]);
+Route::post("/register", [AuthController::class, "register"]);
+    
