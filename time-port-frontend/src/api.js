@@ -20,7 +20,7 @@ export const getUserById = (id) => {
   return axios.get(`${API_BASE_URL}/user/${id}`);
 };
 
-export const addOrUpdateUser = (userData, id = '') => {
+export const addOrUpdateUser = (userData, id ) => {
   return axios.put(`${API_BASE_URL}/user/${id}`, userData);
 };
 

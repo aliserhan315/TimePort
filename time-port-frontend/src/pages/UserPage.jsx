@@ -7,7 +7,7 @@ import { UserContext } from '../Context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Components/Buttons/Buttons';
 import '../Styles/UserPage.css';
-import {getCapsulesByUser} from "../api"
+import { getCapsulesByUser } from '../api';
 
 function UserPage() {
   const navigate = useNavigate();
@@ -18,9 +18,8 @@ function UserPage() {
   useEffect(() => {
     const fetchCapsules = async () => {
       try {
-        const res = await getCapsulesByUser(currentUser.id)
-          const userCapsules = res.data.payload 
-          console.log(userCapsules)
+        const res = await getCapsulesByUser(currentUser.id);
+        const userCapsules = res.data.payload;
 
         setCapsules(userCapsules);
         setFilteredCapsules(userCapsules);
@@ -29,13 +28,15 @@ function UserPage() {
       }
     };
 
-    fetchCapsules();
+    if (currentUser && currentUser.id) {
+      fetchCapsules();
+    }
   }, [currentUser]);
 
   const searchHandler = (e) => {
     const term = e.target.value.toLowerCase();
     const filtered = capsules.filter(
-      capsule =>
+      (capsule) =>
         capsule.name.toLowerCase().includes(term) ||
         capsule.mood.toLowerCase().includes(term)
     );
@@ -52,7 +53,12 @@ function UserPage() {
       {filteredCapsules.length === 0 && (
         <p className="no-capsules-message">No capsules found.</p>
       )}
-      <Button className={'base button Createcapsulebtn'} onClick={()=>navigate('/CreateCapsule')}> Create Capsule </Button>
+      <Button
+        className={'base button Createcapsulebtn'}
+        onClick={() => navigate('/CreateCapsule')}
+      >
+        Create Capsule
+      </Button>
       <Footer />
     </div>
   );
