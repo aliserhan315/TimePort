@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import "../Styles/CreateCapsule.css";
+import { useContext } from "react";
+import { UserContext } from "../Context/UserContext";
+import {addOrUpdateCapsule} from "../api"
+import { useNavigate } from "react-router-dom";
 
   import Button from "../Components/Buttons/Buttons";
 
 const CreateCapsule = () => {
+  const navigate = useNavigate();
+  const { currentUser } = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [mood, setMood] = useState("");
   const [message, setMessage] = useState("");
@@ -22,20 +28,32 @@ const CreateCapsule = () => {
     setFiles(updated);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const capsuleData = {
-      title,
-      mood,
-      message,
-      surprise,
-      isPublic,
-      releaseDate,
-      files,
-    };
-    console.log("Capsule Data: ", capsuleData);
- 
+   const capsuleData = {
+    name: title,
+    user_id:currentUser.id,
+    mood: mood,
+    message:message,
+
+    is_surprise:surprise,
+    is_public: isPublic,
+    release_date: releaseDate,
   };
+  
+   try {
+    const res = await addOrUpdateCapsule(capsuleData);
+    const capsuleId = res.data.payload.id;
+
+    navigate(`/capsule/${capsuleId}`); // go to view page
+  } catch (error) {
+    console.error(error);
+  }
+};
+    
+
+ 
+
 
   return (
     <div>
