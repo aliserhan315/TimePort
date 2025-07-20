@@ -24,10 +24,10 @@ class UserService
             $user->name = $request->input('username');
         }
 
-        if ($request->hasFile('profile_photo')) {
+    if ($request->hasFile('profile_photo')) {
             $file = $request->file('profile_photo');
             $path = $file->store('profile_photos', 'public');
-            $user->profile_photo = Storage::url($path);
+            $user->profile_photo = Storage::url($path);       
         }
 
         $user->save();
