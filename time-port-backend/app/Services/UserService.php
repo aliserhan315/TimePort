@@ -2,6 +2,7 @@
 
 namespace App\Services;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 
 class UserService
@@ -17,17 +18,21 @@ class UserService
         return User::select('id', 'name', 'profile_photo')->find($id);
     }
 
-    public static function createOrUpdateUser($data, $user)
+ public static function createOrUpdateUser($request, $user)
     {
-        $user->name = $data['name'] ?? $user->name;
-        $user->email = $data['email'] ?? $user->email;
+        if ($request->has('username')) {
+            $user->name = $request->input('username');
+        }
 
-
-        if (isset($data['password'])) {
-            $user->password = Hash::make($data['password']);
+        if ($request->hasFile('profile_photo')) {
+            $file = $request->file('profile_photo');
+            $path = $file->store('profile_photos', 'public');
+            $user->profile_photo = Storage::url($path);
         }
 
         $user->save();
+
         return $user;
     }
 }
+
