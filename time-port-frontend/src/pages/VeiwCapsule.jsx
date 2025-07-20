@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import "../Styles/ViewCapsule.css";
-import { getCapsuleById, addOrUpdateFile } from "../api";
+import { getCapsuleById, addOrUpdateFile,getCapsuleFiles } from "../api";
 import { UserContext } from "../Context/UserContext";
 
 const ViewCapsule = () => {
@@ -36,7 +36,7 @@ const ViewCapsule = () => {
 
     try {
       const res = await addOrUpdateFile(formData);
-      setFiles((prev) => [...prev, res.data.payload]); // Assumes backend returns uploaded file
+      setFiles((prev) => [...prev, res.data.payload]);
     } catch (error) {
       console.error("Upload failed:", error);
     }
@@ -66,20 +66,21 @@ const ViewCapsule = () => {
       <div className="uploaded-files">
         <h3>Uploaded Files</h3>
         <div className="file-grid">
-          {files.map((file, i) => (
-            <div key={i} className="file-item">
-              {file.file_type.startsWith("image") ? (
-                <img src={file.url} alt={file.file_name} />
-              ) : file.file_type.startsWith("audio") ? (
-                <audio controls>
-                  <source src={file.url} type={file.file_type} />
-                  Your browser does not support the audio element.
-                </audio>
-              ) : (
-                <p>{file.file_name}</p>
-              )}
-            </div>
-          ))}
+        {files.map((file, i) => (
+          <div key={i} className="file-item">
+            {file.file_type?.startsWith("image") ? (
+              <img src={file.url} alt={file.file_name} />
+            ) : file.file_type?.startsWith("audio") ? (
+              <audio controls>
+                <source src={file.url} type={file.file_type} />
+                Your browser does not support the audio element.
+              </audio>
+            ) : (
+              <a href={file.url} target="_blank" rel="noopener noreferrer">{file.file_name}</a>
+            )}
+          </div>
+        ))}
+
         </div>
       </div>
     </div>
