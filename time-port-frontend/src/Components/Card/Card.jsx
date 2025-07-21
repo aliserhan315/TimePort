@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Card = ({ capsule, owner }) => {
   const navigate = useNavigate();
-  const { name, status, creationdate, activation_date, mood } = capsule;
+  const { name, status, created_at, activation_date, mood } = capsule;
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const Card = ({ capsule, owner }) => {
           <span className="username">{ownername}</span>
         </div>
         <p className="card-text">Status: {status ? "Public" : "Private"}</p>
-        <p className="card-text">Creation Date: {new Date(creationdate).toLocaleDateString()}</p>
+        <p className="card-text">Creation Date: {new Date(created_at).toLocaleDateString()}</p>
         <p className="card-text">Activation Date: {activation.toLocaleDateString()}</p>
         <p className="card-text">Mood: {mood}</p>
       </div>
