@@ -8,6 +8,7 @@ import { UserContext } from '../../Context/UserContext';
 import UserProfilePopup from '../UserPopUp/UserPopUp';
 
 const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
+    const BaseURL=process.env.REACT_APP_BASE_URL;
 
   const [showProfilePopup, setShowProfilePopup] = useState(false);
   const handleProfileClick = () => {
@@ -32,7 +33,7 @@ const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
          {isAuthenticated ? ( 
            <div className=' mobile-auth-links'>
           <Link to="/userpage"onClick={closeMenu}>User-Page</Link>
-          <Link onClick={() => {  navigate('/capsulewall');closeMenu() ;setCurrentUser(null);}} className='mobile-auth'>Logout</Link>
+          <Link onClick={() => { setCurrentUser(null); setTimeout(() => navigate('/capsulewall'), 0); }}  className='mobile-auth'>Logout</Link>
            </div>
            )
          :
@@ -56,14 +57,15 @@ const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
         <div className="user-info">
              
           <img
-              src={currentUser?.profilePic || emptyPfp}
+             src={currentUser?.profile_photo ? `${BaseURL}${currentUser.profile_photo}` : emptyPfp}
+
               alt="User profile"
               className="user-avatar"
               onClick={handleProfileClick}
             />
                       
           <span  onClick={handleProfileClick} className="username">{Username}</span>
-            <Button className="logout-btn" onClick={() => {setCurrentUser(null);    navigate('/capsulewall');}}>logOut</Button>
+            <Button className="logout-btn" onClick={() => { setCurrentUser(null); setTimeout(() => navigate('/capsulewall'), 0); }} >logOut</Button>
             {showProfilePopup && (
               <UserProfilePopup onClose={() => setShowProfilePopup(false)} />)}
           </div>

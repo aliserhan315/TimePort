@@ -35,17 +35,17 @@ const CreateCapsule = () => {
     user_id:currentUser.id,
     mood: mood,
     message:message,
-
     is_surprise:surprise,
     is_public: isPublic,
     release_date: releaseDate,
   };
   
+  
    try {
     const res = await addOrUpdateCapsule(capsuleData);
     const capsuleId = res.data.payload.id;
 
-    navigate(`/capsule/${capsuleId}`); // go to view page
+    navigate(`/capsule/${capsuleId}`); 
   } catch (error) {
     console.error(error);
   }

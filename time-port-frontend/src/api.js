@@ -19,9 +19,14 @@ export const getUserById = (id) => {
   return axios.get(`${API_BASE_URL}/user/${id}`);
 };
 
-export const addOrUpdateUser = (userData, id ) => {
-  return axios.put(`${API_BASE_URL}/user/${id}`, userData);
+export const addOrUpdateUser = (data, id) => {
+  return axios.put(`${API_BASE_URL}/user/${id}`, data, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 };
+
 
 export const deleteUser = (id) => {
   return axios.delete(`${API_BASE_URL}/user/${id}`);

@@ -5,6 +5,7 @@ import emptypfp from '../../assets/emptypfp.png';
 import { addOrUpdateUser } from '../../api';
 
 const UserProfilePopup = ({ onClose }) => {
+  const BaseURL=process.env.REACT_APP_BASE_URL;
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [username, setUsername] = useState(currentUser.name || '');
   const [selectedFile, setSelectedFile] = useState(null);
@@ -19,27 +20,45 @@ const UserProfilePopup = ({ onClose }) => {
     }
   };
 
-  const handleSave = async () => {
-    setErrorMsg('');
-    try {
-      const data = {
-        username,
-        profile_photo: selectedFile,
-      };
+const handleSave = async () => {
+  setErrorMsg('');
 
-      const response = await addOrUpdateUser(data, currentUser.id);
+  try {
+    let base64Image = null;
 
-      if (response?.data?.payload) {
-        setCurrentUser(response.data.payload);
-        onClose();
-      } else {
-        setErrorMsg('Something went wrong. Try again.');
-      }
-    } catch (err) {
-      console.error(err);
-      setErrorMsg('Failed to save. Please try again.');
+    if (selectedFile) {
+      base64Image = await convertToBase64(selectedFile);
     }
-  };
+
+    const payload = {
+      username,
+      profile_photo: base64Image, 
+    };
+    console.log(payload)
+
+    const response = await addOrUpdateUser(payload, currentUser.id);
+
+    if (response?.data?.payload) {
+      setCurrentUser(response.data.payload);
+      onClose();
+    } else {
+      setErrorMsg('Something went wrong. Try again.');
+    }
+  } catch (err) {
+    console.error(err);
+    setErrorMsg('Failed to save. Please try again.');
+  }
+};
+
+const convertToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+};
+
 
   return (
     <div className="profile-popup-overlay">
@@ -48,7 +67,8 @@ const UserProfilePopup = ({ onClose }) => {
         {errorMsg && <p className="error-msg">{errorMsg}</p>}
 
         <div className="profile-preview">
-          <img src={preview} alt="Profile" className="profile-img" />
+         <img src={currentUser.profile_photo? `${BaseURL}${currentUser.profile_photo}` : emptypfp} alt="Profile" className="profile-img" />
+
         </div>
 
         <div className="input-group">
