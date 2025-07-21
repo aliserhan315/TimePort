@@ -1,16 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate ,useLocation} from "react-router-dom";
 import "../Styles/ViewCapsule.css";
-import {
-  getCapsuleById,
-  addOrUpdateFile,
-  deleteFile,
-  deleteCapsule,
-  getCapsuleFiles,
-} from "../api";
+import { getCapsuleById, addOrUpdateFile, deleteFile, deleteCapsule, getCapsuleFiles,} from "../api";
 import { UserContext } from "../Context/UserContext";
 
+
 const ViewCapsule = () => {
+  const location = useLocation();
+
   const BaseURL = process.env.REACT_APP_BASE_URL;
   const { id } = useParams();
   const navigate = useNavigate();
@@ -27,6 +24,15 @@ const ViewCapsule = () => {
     });
   };
 
+  const handleBack = () => {
+  const from = location.state?.from;
+
+  if (from === 'createcapsule') {
+    navigate('/userpage');
+  } else {
+    navigate(-1);
+  }
+};
   useEffect(() => {
     async function fetchCapsuleAndFiles() {
       try {
@@ -86,7 +92,7 @@ const ViewCapsule = () => {
       <div className="view-capsule-header">
         <div className="veiwcapsule-head">
           <h1>{capsule.name}</h1>
-          <button type="button" className="back-button-view" onClick={() => navigate(-1)}>
+          <button type="button" className="back-button-view" onClick={handleBack}>
             ← Back
           </button>
         </div>
@@ -123,8 +129,14 @@ const ViewCapsule = () => {
                     <source src={fileUrl} type={file.file_type} />
                     Your browser does not support the audio element.
                   </audio>
-                ) : (
-                  <a href={fileUrl} target="_blank" rel="noopener noreferrer">
+                  
+                ) :file.file_type?.startsWith("video") ? (
+                  <video controls>
+                    <source src={fileUrl} type={file.file_type} />
+                    Your browser does not support the video element.
+                  </video>
+                ):(
+                  <a className="file-link-view" href={fileUrl} target="_blank" rel="noopener noreferrer">
                     {file.file_name}
                   </a>
                 )}

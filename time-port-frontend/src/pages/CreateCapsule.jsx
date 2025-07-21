@@ -62,7 +62,8 @@ const CreateCapsule = () => {
       });
     }
 
-    navigate(`/capsule/${capsuleId}`);
+    navigate(`/capsule/${capsuleId}`, {state: { from: 'createcapsule'}
+});
   } catch (error) {
     console.error("Error creating capsule or uploading files:", error);
   }
