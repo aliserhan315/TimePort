@@ -19,27 +19,28 @@ const UserProfilePopup = ({ onClose }) => {
     }
   };
 
-  const handleSave = async () => {
-    setErrorMsg('');
-    try {
-      const data = {
-        username,
-        profile_photo: selectedFile,
-      };
+const handleSave = async () => {
+  setErrorMsg('');
 
-      const response = await addOrUpdateUser(data, currentUser.id);
+  try {
+    const data = {
+      username: username,
+      profile_photo: selectedFile,
+    };
 
-      if (response?.data?.payload) {
-        setCurrentUser(response.data.payload);
-        onClose();
-      } else {
-        setErrorMsg('Something went wrong. Try again.');
-      }
-    } catch (err) {
-      console.error(err);
-      setErrorMsg('Failed to save. Please try again.');
+    const response = await addOrUpdateUser(data, currentUser.id);
+
+    if (response?.data?.payload) {
+      setCurrentUser(response.data.payload);
+      onClose();
+    } else {
+      setErrorMsg('Something went wrong. Try again.');
     }
-  };
+  } catch (err) {
+    console.error(err);
+    setErrorMsg('Failed to save. Please try again.');
+  }
+};
 
   return (
     <div className="profile-popup-overlay">
