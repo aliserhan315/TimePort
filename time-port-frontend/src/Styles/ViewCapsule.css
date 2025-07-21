@@ -82,7 +82,7 @@
 }
 
 .file-item {
-  max-width: 400px;
+  min-width: 170px;
   background: #fff;
   border: 1px solid #ddd;
   padding: 10px;
@@ -104,6 +104,9 @@
   cursor: pointer;
   font-size: 1rem;
   transition: color 0.2s ease;
+  margin-top: 5px;
+  text-align: center;
+
 }
 
 .file-item .delete-btn:hover {
@@ -111,7 +114,7 @@
 }
 .file-item img {
   width: 100%;
-  max-width: 350px;
+  max-width:85%;
   height: auto;
   max-height: 200px;
   object-fit: cover;
@@ -156,4 +159,26 @@
   gap: 20px;
   margin-top: 30px;
 }
+.file-link-view {
+  max-width: 85%;
+  display: inline-block;         
+  color: #007BFF;                
+  text-decoration: underline;     
+  font-weight: 600;              
+  word-wrap: break-word;         
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
 
+.file-link-view:hover,
+.file-link-view:focus {
+  color: #0056b3;                 
+  text-decoration: none;         
+}
+
+
+@media (min-width: 768px) {
+  .file-grid {
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  }
+}

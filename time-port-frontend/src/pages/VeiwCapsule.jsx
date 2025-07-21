@@ -136,7 +136,7 @@ const ViewCapsule = () => {
                     Your browser does not support the video element.
                   </video>
                 ):(
-                  <a href={fileUrl} target="_blank" rel="noopener noreferrer">
+                  <a className="file-link-view" href={fileUrl} target="_blank" rel="noopener noreferrer">
                     {file.file_name}
                   </a>
                 )}
