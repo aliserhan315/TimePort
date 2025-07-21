@@ -45,7 +45,7 @@ const CreateCapsule = () => {
     const res = await addOrUpdateCapsule(capsuleData);
     const capsuleId = res.data.payload.id;
 
-    navigate(`/capsule/${capsuleId}`); // go to view page
+    navigate(`/capsule/${capsuleId}`); 
   } catch (error) {
     console.error(error);
   }

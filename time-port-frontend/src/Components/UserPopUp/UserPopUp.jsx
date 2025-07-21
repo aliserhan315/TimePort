@@ -5,7 +5,7 @@ import emptypfp from '../../assets/emptypfp.png';
 import { addOrUpdateUser } from '../../api';
 
 const UserProfilePopup = ({ onClose }) => {
-  const BaseURL='http://localhost:8000';
+  const BaseURL=process.env.REACT_APP_BASE_URL;
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [username, setUsername] = useState(currentUser.name || '');
   const [selectedFile, setSelectedFile] = useState(null);

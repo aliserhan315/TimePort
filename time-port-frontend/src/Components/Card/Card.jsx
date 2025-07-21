@@ -35,7 +35,7 @@ const Card = ({ capsule, owner }) => {
       remainingTimeText = `Remaining: ${hours}h ${minutes}m ${seconds}s`;
     }
   }
-    const BaseURL='http://localhost:8000';
+    const BaseURL=process.env.REACT_APP_BASE_URL;
     
 
   const ownername = owner?.name || 'Unknown User';
