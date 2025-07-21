@@ -35,9 +35,11 @@ const Card = ({ capsule, owner }) => {
       remainingTimeText = `Remaining: ${hours}h ${minutes}m ${seconds}s`;
     }
   }
+    const BaseURL='http://localhost:8000';
+    
 
   const ownername = owner?.name || 'Unknown User';
-  const ownerpfp = owner?.profile_photo || emptyPfp;
+  const ownerpfp =  owner.profile_photo?  `${BaseURL}${owner?.profile_photo}` : emptyPfp;
 
   return (
     <div className="cardcontainer" onClick={() => navigate(`/capsule/${capsule.id}`) }>

@@ -8,6 +8,7 @@ import { UserContext } from '../../Context/UserContext';
 import UserProfilePopup from '../UserPopUp/UserPopUp';
 
 const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
+    const BaseURL='http://localhost:8000';
 
   const [showProfilePopup, setShowProfilePopup] = useState(false);
   const handleProfileClick = () => {
@@ -56,7 +57,7 @@ const Navbar = ({ isAuthenticated = false, Username, Userprofile }) => {
         <div className="user-info">
              
           <img
-              src={currentUser?.profilePic || emptyPfp}
+              src= { currentUser.profile_photo?  `${BaseURL}${currentUser?.profile_photo}` : emptyPfp}
               alt="User profile"
               className="user-avatar"
               onClick={handleProfileClick}

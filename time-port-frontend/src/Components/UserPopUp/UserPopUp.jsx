@@ -5,6 +5,7 @@ import emptypfp from '../../assets/emptypfp.png';
 import { addOrUpdateUser } from '../../api';
 
 const UserProfilePopup = ({ onClose }) => {
+  const BaseURL='http://localhost:8000';
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [username, setUsername] = useState(currentUser.name || '');
   const [selectedFile, setSelectedFile] = useState(null);
@@ -66,7 +67,8 @@ const convertToBase64 = (file) => {
         {errorMsg && <p className="error-msg">{errorMsg}</p>}
 
         <div className="profile-preview">
-          <img src={preview} alt="Profile" className="profile-img" />
+         <img src={currentUser.profile_photo? `${BaseURL}${currentUser.profile_photo}` : emptypfp} alt="Profile" className="profile-img" />
+
         </div>
 
         <div className="input-group">
