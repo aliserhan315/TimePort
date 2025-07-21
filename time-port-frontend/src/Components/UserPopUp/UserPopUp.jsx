@@ -23,12 +23,19 @@ const handleSave = async () => {
   setErrorMsg('');
 
   try {
-    const data = {
-      username: username,
-      profile_photo: selectedFile,
-    };
+    let base64Image = null;
 
-    const response = await addOrUpdateUser(data, currentUser.id);
+    if (selectedFile) {
+      base64Image = await convertToBase64(selectedFile);
+    }
+
+    const payload = {
+      username,
+      profile_photo: base64Image, 
+    };
+    console.log(payload)
+
+    const response = await addOrUpdateUser(payload, currentUser.id);
 
     if (response?.data?.payload) {
       setCurrentUser(response.data.payload);
@@ -41,6 +48,16 @@ const handleSave = async () => {
     setErrorMsg('Failed to save. Please try again.');
   }
 };
+
+const convertToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+};
+
 
   return (
     <div className="profile-popup-overlay">
