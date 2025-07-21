@@ -129,7 +129,13 @@ const ViewCapsule = () => {
                     <source src={fileUrl} type={file.file_type} />
                     Your browser does not support the audio element.
                   </audio>
-                ) : (
+                  
+                ) :file.file_type?.startsWith("video") ? (
+                  <video controls>
+                    <source src={fileUrl} type={file.file_type} />
+                    Your browser does not support the video element.
+                  </video>
+                ):(
                   <a href={fileUrl} target="_blank" rel="noopener noreferrer">
                     {file.file_name}
                   </a>

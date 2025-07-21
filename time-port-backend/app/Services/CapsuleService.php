@@ -39,13 +39,13 @@ class CapsuleService
         if ($position && $position->countryName) {
             $capsule->country = $position->countryName;
         }
-    
+        $capsule->activation_date = $data['release_date'] ?? $capsule->activation_date;
         $capsule->is_activated = Carbon::now()->greaterThanOrEqualTo(Carbon::parse($capsule->activation_date));
         $capsule->is_surprise = $data['is_surprise'] ?? $capsule->is_surprise;
         $capsule->is_public = $data['is_public'] ?? $capsule->is_public;
         $capsule->mood = $data['mood'] ?? $capsule->mood;
         $capsule->message = $data['message'] ?? $capsule->message;
-        $capsule->activation_date = $data['release_date'] ?? $capsule->activation_date;
+     
 
         $capsule->save();
         return $capsule;
