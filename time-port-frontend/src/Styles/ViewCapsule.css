@@ -7,6 +7,27 @@
   min-height: 100vh;
   box-sizing: border-box;
 }
+.veiwcapsule-head{
+  display:flex;
+  justify-content: space-between;
+}
+.back-button-view{
+ max-height: 40px;
+ width:100px;
+
+  background-color: transparent;
+  border: 2px solid #f94b4b;
+  color: #f94b4b;
+ 
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+.back-button-view:hover {
+  background-color: #ff5b5b;
+  color: white;
+}
 
 .view-capsule-header {
   margin-bottom: 30px;

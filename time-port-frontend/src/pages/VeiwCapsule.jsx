@@ -48,12 +48,17 @@ const ViewCapsule = () => {
 
   return (
     <div className="view-capsule-container">
+     
+      
       <div className="view-capsule-header">
+         <div className="veiwcapsule-head">
         <h1>{capsule.name}</h1>
+             <button type="button" className="back-button-view" onClick={() => window.history.back()}>← Back</button>
+      </div>
         <p><strong>Mood:</strong> {capsule.mood}</p>
         <p><strong>Message:</strong> {capsule.message}</p>
       </div>
-
+  
       {isOwner && (
         <div className="file-upload-section">
           <label>

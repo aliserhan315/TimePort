@@ -39,7 +39,7 @@ const Card = ({ capsule, owner }) => {
     
 
   const ownername = owner?.name || 'Unknown User';
-  const ownerpfp =  owner.profile_photo?  `${BaseURL}${owner?.profile_photo}` : emptyPfp;
+  const ownerpfp =  owner?.profile_photo?  `${BaseURL}${owner.profile_photo}` : emptyPfp;
 
   return (
     <div className="cardcontainer" onClick={() => navigate(`/capsule/${capsule.id}`) }>
