@@ -1,44 +1,79 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "../Styles/ViewCapsule.css";
-import { getCapsuleById, addOrUpdateFile,getCapsuleFiles } from "../api";
+import {
+  getCapsuleById,
+  addOrUpdateFile,
+  deleteFile,
+  deleteCapsule,
+  getCapsuleFiles,
+} from "../api";
 import { UserContext } from "../Context/UserContext";
 
 const ViewCapsule = () => {
+  const BaseURL = process.env.REACT_APP_BASE_URL;
   const { id } = useParams();
+  const navigate = useNavigate();
   const [capsule, setCapsule] = useState(null);
   const [files, setFiles] = useState([]);
   const { currentUser } = useContext(UserContext);
 
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+    });
+  };
+
   useEffect(() => {
-    async function fetchCapsule() {
+    async function fetchCapsuleAndFiles() {
       try {
-        const res = await getCapsuleById(id);
-        const capsuleData = res.data.payload;
-        setCapsule(capsuleData);
-        setFiles(capsuleData.files || []);
+        const capsuleRes = await getCapsuleById(id);
+        setCapsule(capsuleRes.data.payload);
+
+        const filesRes = await getCapsuleFiles(id);
+        setFiles(filesRes.data.payload);
       } catch (error) {
-        console.error("Failed to fetch capsule:", error);
+        console.error("Failed to fetch capsule or files:", error);
       }
     }
-    fetchCapsule();
+
+    fetchCapsuleAndFiles();
   }, [id]);
 
   const handleFileChange = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+    const selectedFiles = Array.from(e.target.files);
+    const newFiles = [];
 
-    const formData = new FormData();
-    formData.append("capsule_id", id);
-    formData.append("file_name", file.name);
-    formData.append("file_type", file.type);
-    formData.append("file", file);
+    for (const file of selectedFiles) {
+      const base64 = await convertToBase64(file);
+      const res = await addOrUpdateFile({
+        capsule_id: id,
+        file: base64,
+      });
+      newFiles.push(res.data.payload);
+    }
 
+    setFiles((prev) => [...prev, ...newFiles]);
+  };
+
+  const handleDeleteFile = async (fileId) => {
     try {
-      const res = await addOrUpdateFile(formData);
-      setFiles((prev) => [...prev, res.data.payload]);
+      await deleteFile(fileId);
+      setFiles((prev) => prev.filter((f) => f.id !== fileId));
     } catch (error) {
-      console.error("Upload failed:", error);
+      console.error("Failed to delete file:", error);
+    }
+  };
+
+  const handleDeleteCapsule = async () => {
+    try {
+      await deleteCapsule(id);
+      navigate(-1);
+    } catch (error) {
+      console.error("Failed to delete capsule:", error);
     }
   };
 
@@ -48,22 +83,27 @@ const ViewCapsule = () => {
 
   return (
     <div className="view-capsule-container">
-     
-      
       <div className="view-capsule-header">
-         <div className="veiwcapsule-head">
-        <h1>{capsule.name}</h1>
-             <button type="button" className="back-button-view" onClick={() => window.history.back()}>← Back</button>
-      </div>
+        <div className="veiwcapsule-head">
+          <h1>{capsule.name}</h1>
+          <button type="button" className="back-button-view" onClick={() => navigate(-1)}>
+            ← Back
+          </button>
+        </div>
         <p><strong>Mood:</strong> {capsule.mood}</p>
         <p><strong>Message:</strong> {capsule.message}</p>
+        {isOwner && (
+          <button className="delete-capsule-btn" onClick={handleDeleteCapsule}>
+            Delete Capsule
+          </button>
+        )}
       </div>
-  
+
       {isOwner && (
         <div className="file-upload-section">
           <label>
             Add File:
-            <input type="file" onChange={handleFileChange} />
+            <input type="file" multiple onChange={handleFileChange} />
           </label>
         </div>
       )}
@@ -71,21 +111,31 @@ const ViewCapsule = () => {
       <div className="uploaded-files">
         <h3>Uploaded Files</h3>
         <div className="file-grid">
-        {files.map((file, i) => (
-          <div key={i} className="file-item">
-            {file.file_type?.startsWith("image") ? (
-              <img src={file.url} alt={file.file_name} />
-            ) : file.file_type?.startsWith("audio") ? (
-              <audio controls>
-                <source src={file.url} type={file.file_type} />
-                Your browser does not support the audio element.
-              </audio>
-            ) : (
-              <a href={file.url} target="_blank" rel="noopener noreferrer">{file.file_name}</a>
-            )}
-          </div>
-        ))}
+          {files.map((file) => {
+            const fileUrl = `${BaseURL}/storage/${file.file_path}`;
 
+            return (
+              <div key={file.id} className="file-item">
+                {file.file_type?.startsWith("image") ? (
+                  <img src={fileUrl} alt={file.file_name} className="preview-img" />
+                ) : file.file_type?.startsWith("audio") ? (
+                  <audio controls>
+                    <source src={fileUrl} type={file.file_type} />
+                    Your browser does not support the audio element.
+                  </audio>
+                ) : (
+                  <a href={fileUrl} target="_blank" rel="noopener noreferrer">
+                    {file.file_name}
+                  </a>
+                )}
+                {isOwner && (
+                  <button className="delete-btn" onClick={() => handleDeleteFile(file.id)}>
+                    🗑
+                  </button>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

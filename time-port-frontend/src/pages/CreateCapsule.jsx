@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import "../Styles/CreateCapsule.css";
 import { useContext } from "react";
 import { UserContext } from "../Context/UserContext";
-import {addOrUpdateCapsule} from "../api"
+import {addOrUpdateCapsule,addOrUpdateFile} from "../api"
 import { useNavigate } from "react-router-dom";
 
   import Button from "../Components/Buttons/Buttons";
 
 const CreateCapsule = () => {
+
   const navigate = useNavigate();
   const { currentUser } = useContext(UserContext);
   const [title, setTitle] = useState("");
@@ -21,6 +22,14 @@ const CreateCapsule = () => {
   const handleFileChange = (e) => {
     setFiles([...files, ...Array.from(e.target.files)]);
   };
+  const convertToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+  });
+};
 
   const handleRemoveFile = (index) => {
     const updated = [...files];
@@ -41,20 +50,24 @@ const CreateCapsule = () => {
   };
   
   
-   try {
+    try {
     const res = await addOrUpdateCapsule(capsuleData);
     const capsuleId = res.data.payload.id;
 
-    navigate(`/capsule/${capsuleId}`); 
+    for (const file of files) {
+      const base64 = await convertToBase64(file);
+      await addOrUpdateFile({
+        capsule_id: capsuleId,
+        file: base64,
+      });
+    }
+
+    navigate(`/capsule/${capsuleId}`);
   } catch (error) {
-    console.error(error);
+    console.error("Error creating capsule or uploading files:", error);
   }
 };
     
-
- 
-
-
   return (
     <div>
        <div className="Create-form-header">

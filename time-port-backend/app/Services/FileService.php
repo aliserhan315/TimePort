@@ -3,6 +3,8 @@
 namespace App\Services;
 use App\Models\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
 
 class FileService
 {
@@ -19,18 +21,31 @@ class FileService
 
     public static function createOrUpdateFile($data, $file)
     {
-        $file->capsule_id = $data['capsule_id'] ?? $file->capsule_id;
-        $file->file_name = $data['file_name'] ?? $file->file_name;
-        $file->file_type = $data['file_type'] ?? $file->file_type;
-        if (isset($data['file'])) {
-        $path = $data['file']->store('capsule_files', 'public');
-        $file->file_path = $path;
+  
+     if (isset($data['file']) && preg_match('/^data:(.+);base64,(.+)$/', $data['file'], $matches)) {
+        $mimeType = $matches[1]; 
+        $base64Data = $matches[2];
+        $extension = explode('/', $mimeType)[1];
+
+        $decodedData = base64_decode($base64Data);
+        $fileName = Str::random(10) . '.' . $extension;
+        $filePath = "files/{$fileName}";
+
+        Storage::disk('public')->put($filePath, $decodedData);
+
+        if (!$file) {
+            $file = new \App\Models\File(); 
         }
 
+        $file->capsule_id = $data['capsule_id'] ?? null;
+        $file->file_name = $fileName;
+        $file->file_type = $mimeType;
+        $file->file_path = $filePath;
+
         $file->save();
-        $file->url = asset('storage/' . $file->file_path);
         return $file;
-    }
+ }
+}
     public static function getAllCapsuleFiles($capsule_id)
 {
    return File::where('capsule_id', $capsule_id)->get();
