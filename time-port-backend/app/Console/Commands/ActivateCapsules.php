@@ -27,30 +27,20 @@ class ActivateCapsules extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+      public function handle()
     {
-       $now= Carbon::now();
-    $capsulesToActivate = Capsule::where('is_activated', false)
-    ->whereDate('activation_date', '<=', $now->toDateString())
-    ->get();
-    if ($capsulesToActivate->isEmpty()) {
-        $this->info('No capsules to activate at this time.');
-        return;
-        }
-     foreach ($capsulesToActivate as $capsule) {
-            $owner = User::find($capsule->user_id);
+        
+      $capsules =  Capsule::where('is_activated', false)
+            ->whereDate('activation_date', '<=', Carbon::today())
+            ->update(['is_activated' => true]);
+            // foreach ($capsules as $capsule) {
+            //     $user = User::find($capsule->user_id);
 
-            if (!$owner) {      
-                continue; 
-            }
-         
-            $capsule->is_activated = true;
-            $capsule->save();
-            Mail::to($owner->email)->send(new CapsuleActivatedMail($capsule, $owner));
+            //     Mail::to($user->email)->send(new CapsuleActivatedMail($capsule));
+                
+            // }
 
-          }
 
-        $this->info("Capsule activation process completed. Activated capsules.");
-  
+        $this->info('Capsules activated successfully.');
     }
 }

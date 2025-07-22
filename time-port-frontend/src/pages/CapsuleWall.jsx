@@ -104,6 +104,7 @@ const CapsuleWall = () => {
         >
           <option value="">All Countries</option>
           <option value="lebanon">Lebanon</option>
+          <option value="Qatar">Qatar</option>
           <option value="usa">USA</option>
           <option value="france">France</option>
         </select>
