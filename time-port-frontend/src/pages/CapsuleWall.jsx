@@ -68,7 +68,7 @@ const CapsuleWall = () => {
       const yearMatch = year ? activationYear === year : true;
 
       const countryMatch = country
-        ? capsule.country.toLowerCase() === country.toLowerCase()
+        ? capsule.country?.toLowerCase() === country.toLowerCase()
         : true;
 
       return (nameMatch || moodMatch) && yearMatch && countryMatch;

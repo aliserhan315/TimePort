@@ -47,6 +47,7 @@ const CreateCapsule = () => {
     is_surprise:surprise,
     is_public: isPublic,
     release_date: releaseDate,
+    ip: "185.37.111.1",
   };
   
   
