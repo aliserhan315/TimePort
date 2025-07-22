@@ -37,8 +37,8 @@ function UserPage() {
     const term = e.target.value.toLowerCase();
     const filtered = capsules.filter(
       (capsule) =>
-        capsule.name.toLowerCase().includes(term) ||
-        capsule.mood.toLowerCase().includes(term)
+        capsule.name?.toLowerCase().includes(term) ||
+        capsule.mood?.toLowerCase().includes(term)
     );
     setFilteredCapsules(filtered);
   };

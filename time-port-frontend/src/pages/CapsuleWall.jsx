@@ -61,8 +61,8 @@ const CapsuleWall = () => {
       if (new Date(capsule.activation_date) > now) return false;
 
       const term = search.toLowerCase();
-      const nameMatch = capsule.name.toLowerCase().includes(term);
-      const moodMatch = capsule.mood.toLowerCase().includes(term);
+      const nameMatch = capsule.name?.toLowerCase().includes(term);
+      const moodMatch = capsule.mood?.toLowerCase().includes(term);
 
       const activationYear = new Date(capsule.activation_date).getFullYear();
       const yearMatch = year ? activationYear === year : true;
