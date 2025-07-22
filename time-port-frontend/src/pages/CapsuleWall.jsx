@@ -68,7 +68,7 @@ const CapsuleWall = () => {
       const yearMatch = year ? activationYear === year : true;
 
       const countryMatch = country
-        ? capsule.country.toLowerCase() === country.toLowerCase()
+        ? capsule.country?.toLowerCase() === country.toLowerCase()
         : true;
 
       return (nameMatch || moodMatch) && yearMatch && countryMatch;
@@ -104,6 +104,7 @@ const CapsuleWall = () => {
         >
           <option value="">All Countries</option>
           <option value="lebanon">Lebanon</option>
+          <option value="Qatar">Qatar</option>
           <option value="usa">USA</option>
           <option value="france">France</option>
         </select>

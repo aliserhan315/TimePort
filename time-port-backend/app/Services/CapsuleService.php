@@ -34,8 +34,9 @@ class CapsuleService
     {
         $capsule->user_id = $data['user_id'] ?? $capsule->user_id;
         $capsule->name = $data['name'] ?? $capsule->name;
+       
      
-        $position = Location::get();
+        $position = Location::get( "91.151.226.72");
         if ($position && $position->countryName) {
             $capsule->country = $position->countryName;
         }
