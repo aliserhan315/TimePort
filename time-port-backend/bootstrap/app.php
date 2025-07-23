@@ -21,5 +21,5 @@ return Application::configure(basePath: dirname(__DIR__))
     })
      ->withSchedule(function (Schedule $schedule) {
         
-        $schedule->command('app:activate-capsules')->dailyAt('00:00');
+        $schedule->command('app:activate-capsules')->everyMinute();
     })->create();

@@ -30,15 +30,18 @@ class ActivateCapsules extends Command
       public function handle()
     {
         
-      $capsules =  Capsule::where('is_activated', false)
+           Capsule::where('is_activated', false)
             ->whereDate('activation_date', '<=', Carbon::today())
             ->update(['is_activated' => true]);
-            // foreach ($capsules as $capsule) {
-            //     $user = User::find($capsule->user_id);
+            $capsules = Capsule::where('is_activated', false)
+        ->whereDate('activation_date', '<=', Carbon::today())
+        ->get();
+            foreach ($capsules as $capsule) {
+                $user = User::find($capsule->user_id);
 
-            //     Mail::to($user->email)->send(new CapsuleActivatedMail($capsule));
+                Mail::to($user->email)->send(new CapsuleActivatedMail($capsule,$user));
                 
-            // }
+            }
 
 
         $this->info('Capsules activated successfully.');
