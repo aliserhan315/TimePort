@@ -47,7 +47,7 @@ class CapsuleActivatedMail extends Mailable
             with: [
                 'capsuleName' => $this->capsule->name,
                 'userName' => $this->user->name, 
-                'activationDate' => $this->capsule->activation_date->format('F j, Y'),
+               'activationDate' => \Carbon\Carbon::parse($this->capsule->activation_date)->format('F j, Y'),
             ],
         );
     }
