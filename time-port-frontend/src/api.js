@@ -1,73 +1,83 @@
-
 import axios from 'axios';
+
 const BaseURL = process.env.REACT_APP_BASE_URL;
 const API_BASE_URL = `${BaseURL}/api`;
 
+const axiosInstance = axios.create({
+  baseURL: API_BASE_URL,
+});
+
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('jwt_token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
 export const registerUser = (userData) => {
-  return axios.post(`${API_BASE_URL}/register`, userData);
+  return axiosInstance.post(`/register`, userData);
 };
 
 export const loginUser = (userData) => {
-  return axios.post(`${API_BASE_URL}/login`, userData);
+  return axiosInstance.post(`/login`, userData);
 };
 
 export const getAllUsers = () => {
-  return axios.get(`${API_BASE_URL}/user`);
+  return axiosInstance.get(`/user`);
 };
 
 export const getUserById = (id) => {
-  return axios.get(`${API_BASE_URL}/user/${id}`);
+  return axiosInstance.get(`/user/${id}`);
 };
 
 export const addOrUpdateUser = (data, id) => {
-  return axios.put(`${API_BASE_URL}/user/${id}`, data, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  return axiosInstance.put(`/user/${id}`, data);
 };
 
-
 export const deleteUser = (id) => {
-  return axios.delete(`${API_BASE_URL}/user/${id}`);
+  return axiosInstance.delete(`/user/${id}`);
 };
 
 export const getAllCapsules = () => {
-  return axios.get(`${API_BASE_URL}/capsule`);
+  return axiosInstance.get(`/capsule`);
 };
 
 export const getCapsuleById = (id) => {
-  return axios.get(`${API_BASE_URL}/capsule/${id}`);
+  return axiosInstance.get(`/capsule/${id}`);
 };
 
 export const getCapsulesByUser = (userId) => {
-  return axios.get(`${API_BASE_URL}/capsule/user/${userId}`);
+  return axiosInstance.get(`/capsule/user/${userId}`);
 };
 
 export const addOrUpdateCapsule = (capsuleData, id = '') => {
-  return axios.put(`${API_BASE_URL}/capsule/${id}`, capsuleData);
+  return axiosInstance.put(`/capsule/${id}`, capsuleData);
 };
 
 export const deleteCapsule = (id) => {
-  return axios.delete(`${API_BASE_URL}/capsule/${id}`);
+  return axiosInstance.delete(`/capsule/${id}`);
 };
 
 export const getAllFiles = () => {
-  return axios.get(`${API_BASE_URL}/file`);
+  return axiosInstance.get(`/file`);
 };
 
 export const getCapsuleFiles = (capsuleId) => {
-  return axios.get(`${API_BASE_URL}/file/capsule/${capsuleId}`);
+  return axiosInstance.get(`/file/capsule/${capsuleId}`);
 };
 
 export const getFileById = (id) => {
-  return axios.get(`${API_BASE_URL}/file/${id}`);
+  return axiosInstance.get(`/file/${id}`);
 };
 
 export const addOrUpdateFile = (fileData, id = '') => {
-  return axios.put(`${API_BASE_URL}/file/${id}`, fileData);
+  return axiosInstance.put(`/file/${id}`, fileData);
 };
 
 export const deleteFile = (id) => {
-  return axios.delete(`${API_BASE_URL}/file/${id}`);
+  return axiosInstance.delete(`/file/${id}`);
 };
