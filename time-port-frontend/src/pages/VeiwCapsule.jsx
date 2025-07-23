@@ -3,6 +3,12 @@ import { useParams, useNavigate ,useLocation} from "react-router-dom";
 import "../Styles/ViewCapsule.css";
 import { getCapsuleById, addOrUpdateFile, deleteFile, deleteCapsule, getCapsuleFiles,} from "../api";
 import { UserContext } from "../Context/UserContext";
+import JSZip from "jszip";
+import { saveAs } from "file-saver";
+
+
+
+
 
 
 const ViewCapsule = () => {
@@ -23,6 +29,31 @@ const ViewCapsule = () => {
       reader.onerror = reject;
     });
   };
+  const handleDownloadAll = async () => {
+  const zip = new JSZip();
+
+  const folder = zip.folder(capsule.name || "capsule_files");
+
+  await Promise.all(
+    files.map(async (file) => {
+      try {
+        const fileUrl = `${BaseURL}/storage/${file.file_path}`;
+        const response = await fetch(fileUrl);
+        if (!response.ok) throw new Error("Network response not ok");
+        const blob = await response.blob();
+        const filename = file.file_name || `file_${file.id}`;
+
+        folder.file(filename, blob);
+      } catch (error) {
+        console.error("Failed to fetch or add file:", file.file_name, error);
+      }
+    })
+  );
+
+  zip.generateAsync({ type: "blob" }).then((content) => {
+    saveAs(content, `${capsule.name || "capsule"}_files.zip`);
+  });
+};
 
   const handleBack = () => {
   const from = location.state?.from;
@@ -150,6 +181,9 @@ const ViewCapsule = () => {
           })}
         </div>
       </div>
+       {/* <button onClick={handleDownloadAll} className="download-all-btn">
+    Download All Files as ZIP
+  </button> */}
     </div>
   );
 };
