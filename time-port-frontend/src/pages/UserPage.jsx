@@ -14,10 +14,11 @@ function UserPage() {
   const { currentUser } = useContext(UserContext);
   const [capsules, setCapsules] = useState([]);
   const [filteredCapsules, setFilteredCapsules] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchCapsules = async () => {
       try {
+        setLoading(true);
         const res = await getCapsulesByUser(currentUser.id);
         const userCapsules = res.data.payload;
 
@@ -25,6 +26,8 @@ function UserPage() {
         setFilteredCapsules(userCapsules);
       } catch (err) {
         console.error('Failed to fetch capsules:', err);
+      }finally{
+        setLoading(false);
       }
     };
 
@@ -44,24 +47,30 @@ function UserPage() {
   };
 
   return (
-    <div className="App">
-      <SearchBox
-        placeholder="Search by name or mood..."
-        onChangeHandler={searchHandler}
-      />
-      <CardList listcomponent={filteredCapsules} />
-      {filteredCapsules.length === 0 && (
-        <p className="no-capsules-message">No capsules found.</p>
-      )}
-      <Button
-        className={'base button Createcapsulebtn'}
-        onClick={() => navigate('/CreateCapsule')}
-      >
-        Create Capsule
-      </Button>
-      <Footer />
-    </div>
-  );
+  <div className="App">
+    {loading ? (
+      <div className="loading">Loading your capsules...</div>
+    ) : (
+      <>
+        <SearchBox
+          placeholder="Search by name or mood..."
+          onChangeHandler={searchHandler}
+        />
+        <CardList listcomponent={filteredCapsules} />
+        {filteredCapsules.length === 0 && (
+          <p className="no-capsules-message">No capsules found.</p>
+        )}
+        <Button
+          className={'base button Createcapsulebtn'}
+          onClick={() => navigate('/CreateCapsule')}
+        >
+          Create Capsule
+        </Button>
+        <Footer />
+      </>
+    )}
+  </div>
+);
 }
 
 export default UserPage;

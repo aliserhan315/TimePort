@@ -23,15 +23,6 @@ class Capsule extends Model
     ];
 
 
-    public function files()
-    {
-        return $this->hasMany(File::class, 'capsule_id');
-    }
-
  
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
 }
 
