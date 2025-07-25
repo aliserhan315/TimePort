@@ -58,7 +58,7 @@ class FileService
             return null;
         }
 
-        if ($file->file_path && Storage::disk('private')->exists($file->file_path)) {
+        if ($file->file_path && Storage::disk('public')->exists($file->file_path)) {
             return [
                 'path' => $file->file_path,
                 'name' => $file->file_name ?? basename($file->file_path)
