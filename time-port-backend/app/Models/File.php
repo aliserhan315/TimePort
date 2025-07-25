@@ -19,10 +19,7 @@ class File extends Model
         'file_path',
     ];
 
-    public function capsule()
-    {
-        return $this->belongsTo(Capsule::class, 'capsule_id');
-    }
+  
 }
 
 

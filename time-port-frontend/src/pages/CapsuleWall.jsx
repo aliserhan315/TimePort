@@ -13,14 +13,14 @@ const CapsuleWall = () => {
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [usersMap, setUsersMap] = useState({});
-
+const [loading, setLoading] = useState(true);
   const currentYear = new Date().getFullYear();
   const lastYear = currentYear - 1;
 
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
-
+            setLoading(true);
         const usersRes = await getAllUsers();
         const usersData = usersRes.data.payload;
         const map = {};
@@ -47,7 +47,9 @@ const CapsuleWall = () => {
         setFilteredCapsules(visibleCapsules);
       } catch (err) {
         console.error('Failed to fetch capsules:', err);
-      }
+      }finally {
+      setLoading(false); // done loading
+    }
     };
 
     fetchInitialData();
@@ -94,58 +96,65 @@ const CapsuleWall = () => {
     filterCapsules(searchTerm, selectedYear, value);
   };
 
-  return (
-    <div className="App">
-      <div className="header">
-        <select
-          className="country-dropdown"
-          onChange={handleCountryChange}
-          value={selectedCountry}
-        >
-          <option value="">All Countries</option>
-          <option value="lebanon">Lebanon</option>
-          <option value="Qatar">Qatar</option>
-          <option value="usa">USA</option>
-          <option value="france">France</option>
-        </select>
+return (
+  <div className="App">
+    {loading ? (
+      <div className="loading">Loading capsules...</div>
+    ) : (
+      <>
+        <div className="header">
+          <select
+            className="country-dropdown"
+            onChange={handleCountryChange}
+            value={selectedCountry}
+          >
+            <option value="">All Countries</option>
+            <option value="lebanon">Lebanon</option>
+            <option value="Qatar">Qatar</option>
+            <option value="usa">USA</option>
+            <option value="france">France</option>
+          </select>
 
-        <div className="year-filters">
-          <div
-            className={`year-box ${selectedYear === null ? 'active' : ''}`}
-            onClick={() => filterByYear(null)}
-          >
-            All
+          <div className="year-filters">
+            <div
+              className={`year-box ${selectedYear === null ? 'active' : ''}`}
+              onClick={() => filterByYear(null)}
+            >
+              All
+            </div>
+            <div
+              className={`year-box ${selectedYear === currentYear ? 'active' : ''}`}
+              onClick={() => filterByYear(currentYear)}
+            >
+              {currentYear}
+            </div>
+            <div
+              className={`year-box ${selectedYear === lastYear ? 'active' : ''}`}
+              onClick={() => filterByYear(lastYear)}
+            >
+              {lastYear}
+            </div>
           </div>
-          <div
-            className={`year-box ${selectedYear === currentYear ? 'active' : ''}`}
-            onClick={() => filterByYear(currentYear)}
-          >
-            {currentYear}
-          </div>
-          <div
-            className={`year-box ${selectedYear === lastYear ? 'active' : ''}`}
-            onClick={() => filterByYear(lastYear)}
-          >
-            {lastYear}
-          </div>
+
+          <SearchBox
+            placeholder="Search by name or mood..."
+            onChangeHandler={handleSearch}
+          />
         </div>
 
-        <SearchBox
-          placeholder="Search by name or mood..."
-          onChangeHandler={handleSearch}
+        <CardListWall
+          listcomponent={filteredCapsules}
+          usersMap={usersMap}
         />
-      </div>
 
-      <CardListWall
-        listcomponent={filteredCapsules}
-        usersMap={usersMap}
-      />
+        <div className="footer-placeholder">
+          <Footer />
+        </div>
+      </>
+    )}
+  </div>
+);
 
-      <div className="footer-placeholder">
-        <Footer />
-      </div>
-    </div>
-  );
 };
 
 export default CapsuleWall;

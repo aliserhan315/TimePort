@@ -10,10 +10,11 @@ const CardList = ({ listcomponent }) => {
 
  
 
+  const visibleCards = listcomponent.slice(-30).reverse();;
   return (
     <div className='card-list-wrapper'>
       <div className='card-list' ref={containerRef}>
-        {listcomponent.map((Capsule, idx) => (
+        {visibleCards.map((Capsule, idx) => (
           <Card  capsule={Capsule} owner={currentUser} />
         ))}
       </div>
