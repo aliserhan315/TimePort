@@ -48,7 +48,7 @@ const [loading, setLoading] = useState(true);
       } catch (err) {
         console.error('Failed to fetch capsules:', err);
       }finally {
-      setLoading(false); // done loading
+      setLoading(false); 
     }
     };
 

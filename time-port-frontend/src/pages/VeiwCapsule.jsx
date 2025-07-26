@@ -7,10 +7,6 @@ import JSZip from "jszip";
 import { saveAs } from "file-saver";
 
 
-
-
-
-
 const ViewCapsule = () => {
   const location = useLocation();
 
@@ -167,6 +163,7 @@ const ViewCapsule = () => {
                     Your browser does not support the video element.
                   </video>
                 ):(
+                  
                   <a className="file-link-view" href={fileUrl} target="_blank" rel="noopener noreferrer">
                     {file.file_name}
                   </a>
