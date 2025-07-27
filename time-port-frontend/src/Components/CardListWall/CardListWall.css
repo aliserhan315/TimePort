@@ -11,11 +11,11 @@
   padding-right: 3px;
 }
 .card-list-wall {
-  width: 98%;
+  width: 97%;
   margin: auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 20px 30px;
+  gap: 20px 35px;
   padding: 1rem;
   box-sizing: border-box;
 }
