@@ -133,7 +133,7 @@ const CreateCapsule = () => {
 
         <div className="file-list">
           {files.map((file, index) => (
-            <div key={index} className="file-item">
+            <div key={index} className="file-item-create">
               {file.name}
               <Button type="button" onClick={() => handleRemoveFile(index)}>🗑</Button>
             </div>

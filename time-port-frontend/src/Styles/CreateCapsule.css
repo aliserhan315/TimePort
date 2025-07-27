@@ -133,7 +133,7 @@ textarea {
   margin-top: 10px;
 }
 
-.file-item {
+.file-item-create {
   display: flex;
   justify-content: space-between;
   background: #f0fff0;

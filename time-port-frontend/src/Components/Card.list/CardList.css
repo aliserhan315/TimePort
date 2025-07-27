@@ -19,7 +19,7 @@
 .card-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 30px;
+  gap: 35px;
   width: 100%;
   box-sizing: border-box;
   padding: 10px 5px;
